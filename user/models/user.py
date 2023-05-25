@@ -10,7 +10,7 @@ from .user_role import UserRole
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["age"]
 
     username = None
     last_name = None
