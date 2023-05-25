@@ -38,6 +38,7 @@ class UserAdmin(admin.ModelAdmin):
                 "fields": (
                     "role",
                     "is_staff",
+                    "is_superuser",
                 )
             },
         ),
