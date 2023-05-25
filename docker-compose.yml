@@ -1,0 +1,61 @@
+version: "3.5"
+
+
+networks:
+  network:
+    name: network
+
+services:
+  nginx:
+    container_name: nginx
+    build: services/nginx
+    image: nginx
+    networks:
+      - network
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../prodstatic:/var/www/prodstatic/
+    restart: always
+
+  web:
+    build:
+      context: .
+    container_name: web
+    user: "${UID}:${GID}"
+    command:
+      sh run_web.sh
+    depends_on:
+      - db
+    env_file:
+      - .env
+    networks:
+      - network
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ../static:/app/static
+    restart: always
+
+  db:
+    container_name: db
+    image: postgres:14.0
+    networks:
+      - network
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - db:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+
+  db:
+    external: false
