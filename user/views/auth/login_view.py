@@ -26,4 +26,4 @@ class LoginView(BaseAPIView):
     def get_result(self):
         serializer = self.request_serializer(data=self.request.data)
         serializer.is_valid(raise_exception=True)
-        return self.response_serializer(serializer.validated_data).data
+        return {'access': serializer.validated_data['access']}
