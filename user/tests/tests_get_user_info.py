@@ -53,7 +53,6 @@ class TestOtherUserInfo(BaseGameCoreTestCase):
         assert "last_seen" in response_data
         expected = {
             "id": self.other_user.id,
-            "first_name": None,
             "last_seen": response_data["last_seen"],
             "role": "D"
         }
