@@ -5,9 +5,28 @@ from rest_framework import serializers
 from user.models import User
 
 
+class UpdateUserInfoSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=False)
+
+    class Meta:
+        model = User
+        fields = (
+            "first_name",
+            "avatar",
+            "email",
+            "age",
+            "is_first_name_private",
+            "is_age_private",
+            "is_email_private",
+            "is_date_joined_private",
+        )
+        ref_name = "user_info_update"
+
+
 class UserInfoSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     role = serializers.CharField(max_length=255, read_only=True)
+    avatar = serializers.ImageField(read_only=False)
     date_joined = serializers.DateTimeField(read_only=True)
     last_seen = serializers.DateTimeField(read_only=True)
     preferences = serializers.ListField(
@@ -43,6 +62,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 class OtherUserInfoSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(max_length=255, source="user_info_first_name", required=False)
     age = serializers.IntegerField(source="user_info_age", required=False)
+    avatar = serializers.ImageField(required=False)
     email = serializers.CharField(max_length=255, source="user_info_email", required=False)
     date_joined = serializers.CharField(max_length=255, source="user_info_date_joined", required=False)
 

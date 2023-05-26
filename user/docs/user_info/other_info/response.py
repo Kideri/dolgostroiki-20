@@ -6,6 +6,7 @@ from user.models import UserRole
 
 class OtherUserInfoSchemaSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=True)
+    avatar = serializers.ImageField(required=False)
     first_name = serializers.CharField(max_length=255, required=False)
     age = serializers.IntegerField(min_value=12, max_value=99, required=False)
     email = serializers.CharField(max_length=255, required=False)
