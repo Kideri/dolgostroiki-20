@@ -70,6 +70,21 @@ class User(AbstractUser):
         return [_.target.code for _ in self.targets.all()]
 
     @property
+    def user_current_level(self):
+        from levels.models import UserLevel
+        if not UserLevel.objects.filter(user=self).exists():
+
+            level = UserLevel.objects.create(user=self)
+            level.save()
+            level.get_current_level()
+            return level
+
+        self.level.get_current_level()
+        self.save()
+
+        return self.level
+
+    @property
     def access_token(self):
         from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 

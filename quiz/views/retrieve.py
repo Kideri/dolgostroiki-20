@@ -4,7 +4,7 @@ from common.execptions import CustomException
 from common.serializers import BaseResponseSerializer
 from common.views.base_api import BaseAPIView
 from quiz.docs import QuestionRetrieveDocsSerializer
-from quiz.models import Question
+from quiz.models import Question, UserAnswers
 from quiz.serializers import (
     QuestionRetrieveSerializer
 )
@@ -28,4 +28,7 @@ class QuestionRetrieveView(BaseAPIView):
         if not object_.exists():
             raise CustomException("question not found")
         object_ = object_.first()
-        return self.response_serializer(object_).data
+        user_answers = UserAnswers.objects.filter(user=self.request.user, question=object_).first()
+        data = self.response_serializer(object_).data
+        data.update({"user_answers": user_answers.answers if user_answers else None})
+        return data

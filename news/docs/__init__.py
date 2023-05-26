@@ -1,1 +1,1 @@
-from .response import NewsListDocsSerializer, NewsRetrieveDocsSerializer
+from .response import NewsListDocsSerializer, NewsRetrieveDocsSerializer, TagsListDocsSerializer

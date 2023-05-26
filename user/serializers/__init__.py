@@ -12,3 +12,4 @@ from .target import (
     TargetSerializer,
     SetTargetsRequestSerializer
 )
+from .vk_login import VkLoginRequestSerializer

@@ -10,11 +10,13 @@ from user.views import (
     SetPreferencesView,
     TargetListView,
     SetTargetsView,
+    VkLoginView,
 )
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("signin/", LoginView.as_view(), name="login"),
+    path("vk_signin/", VkLoginView.as_view(), name="vk_login"),
     path("me/", UserInfoView.as_view(), name="me"),
     path("user/<int:user_id>/", OtherUserInfoView.as_view(), name="user_info"),
     path("update_me/", UpdateUserInfoView.as_view(), name="update_user_info"),

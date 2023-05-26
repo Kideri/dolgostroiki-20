@@ -14,7 +14,7 @@ class PreferencesListView(BaseAPIView):
 
     @swagger_auto_schema(
         responses={200: PreferenceResponseSerializer(), 401: BaseResponseSerializer()},
-        tags=["Preferences"],
+        tags=["Profile"],
         operation_id="Get preferences list",
     )
     def get(self, request):

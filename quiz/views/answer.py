@@ -4,7 +4,7 @@ from common.execptions import CustomException
 from common.serializers import BaseResponseSerializer
 from common.views.base_api import BaseAPIView
 from quiz.docs import AnswerQuestionDocsResponseSerializer
-from quiz.models import Question
+from quiz.models import Question, UserAnswers
 from quiz.serializers import (
     AnswerQuestionResponseSerializer,
     AnswerQuestionRequestSerializer
@@ -33,6 +33,10 @@ class QuestionAnswerView(BaseAPIView):
             raise CustomException("question not found")
 
         object_ = object_.first()
+
+        if UserAnswers.objects.filter(user=self.request.user, question=object_).exists():
+            raise CustomException("question already answered")
+
         score = 0
         bad_score = 0
 
@@ -45,6 +49,17 @@ class QuestionAnswerView(BaseAPIView):
 
         score = round(score / (len(correct_answers) + bad_score), 3)
         reaction = object_.correct_answer_reaction if score == 1 else object_.incorrect_answer_reaction
+
+        level = self.request.user.user_current_level
+        level.total_exp += int(object_.score * score)
+        level.process_level()
+
+        UserAnswers.objects.create(
+            user=self.request.user,
+            question=object_,
+            answers=user_answers,
+            score_received=score,
+        )
 
         return self.response_serializer(
             {'score': score, 'answers': object_.correct_answers_retrieve, 'reaction': reaction}

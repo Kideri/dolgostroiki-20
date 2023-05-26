@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 from rest_framework import serializers
 
+from levels.serializers import UserLevelResponseSerializer
 from user.models import User
 
 
@@ -29,6 +30,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
     avatar = serializers.ImageField(read_only=False)
     date_joined = serializers.DateTimeField(read_only=True)
     last_seen = serializers.DateTimeField(read_only=True)
+    level = UserLevelResponseSerializer(source='user_current_level', required=False)
     preferences = serializers.ListField(
         child=serializers.CharField(max_length=255), required=False, help_text="User preferences codes",
         source="user_info_preferences", read_only=True
@@ -49,6 +51,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
             "last_seen",
             "role",
             "age",
+            "level",
             "is_first_name_private",
             "is_age_private",
             "is_email_private",

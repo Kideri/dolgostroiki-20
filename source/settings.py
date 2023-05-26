@@ -61,11 +61,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'colorfield',
     'drf_yasg',
     'common',
     'user',
     'quiz',
     'news',
+    'levels',
 ]
 
 AUTH_USER_MODEL = "user.User"

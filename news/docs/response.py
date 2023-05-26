@@ -1,6 +1,6 @@
 from common.serializers import BaseResponseSerializer
 
-from news.serializers import NewsListSerializer, NewsRetrieveSerializer
+from news.serializers import NewsListSerializer, NewsRetrieveSerializer, TagsListSerializer
 
 
 class NewsListDocsSerializer(BaseResponseSerializer):
@@ -9,3 +9,7 @@ class NewsListDocsSerializer(BaseResponseSerializer):
 
 class NewsRetrieveDocsSerializer(BaseResponseSerializer):
     result = NewsRetrieveSerializer()
+
+
+class TagsListDocsSerializer(BaseResponseSerializer):
+    result = TagsListSerializer()

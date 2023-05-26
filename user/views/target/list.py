@@ -14,7 +14,7 @@ class TargetListView(BaseAPIView):
 
     @swagger_auto_schema(
         responses={200: TargetesponseSerializer(), 401: BaseResponseSerializer()},
-        tags=["Target"],
+        tags=["Profile"],
         operation_id="Get targets list",
     )
     def get(self, request):

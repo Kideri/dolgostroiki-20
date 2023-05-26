@@ -3,6 +3,7 @@ from django.db import models
 
 class Question(models.Model):
     question = models.CharField(max_length=2047, null=False, blank=False)
+    score = models.PositiveIntegerField(default=1)
     correct_answer_reaction = models.CharField(max_length=2047, null=True, blank=True)
     incorrect_answer_reaction = models.CharField(max_length=2047, null=True, blank=True)
 

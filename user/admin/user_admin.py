@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from user.models import User, UserPreferences, UserTargets
+from levels.models import UserLevel
 
 
 class PreferenceInline(admin.TabularInline):
@@ -11,11 +12,18 @@ class TargetInline(admin.TabularInline):
     model = UserTargets
 
 
+class LevelInline(admin.TabularInline):
+    model = UserLevel
+
+    readonly_fields = ["current_level", "total_exp"]
+
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     inlines = [
         PreferenceInline,
-        TargetInline
+        TargetInline,
+        LevelInline
     ]
     list_display = (
         "id",
