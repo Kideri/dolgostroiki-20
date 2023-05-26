@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator
 
 from ..managers import UserManager
 from .user_role import UserRole
@@ -10,15 +10,16 @@ from .user_role import UserRole
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["age"]
+    REQUIRED_FIELDS = []
 
     username = None
+    first_name = models.CharField(_("first name"), max_length=150, blank=True, null=True)
     last_name = None
     email = models.EmailField(_('email address'), unique=True)
 
     objects = UserManager()
 
-    age = models.IntegerField(validators=[MinValueValidator(12), MaxValueValidator(99)])
+    age = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
     role = models.CharField(max_length=1, choices=UserRole.choices, default=UserRole.default)
     last_seen = models.DateTimeField(default=timezone.now)
 
@@ -53,11 +54,11 @@ class User(AbstractUser):
 
     @property
     def user_info_preferences(self):
-        return [_.code for _ in self.preferences.all()]
+        return [_.preference.code for _ in self.preferences.all()]
 
     @property
     def user_info_targets(self):
-        return [_.code for _ in self.targets.all()]
+        return [_.target.code for _ in self.targets.all()]
 
     @property
     def access_token(self):

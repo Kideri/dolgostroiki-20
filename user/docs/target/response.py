@@ -8,3 +8,7 @@ class TargetesponseSerializer(BaseResponseSerializer):
 
     class Meta:
         ref_name = "Target response"
+
+
+class SetTargetResponseSerializer(BaseResponseSerializer):
+    result = serializers.ListSerializer(child=serializers.CharField(max_length=31, help_text='Codes of set targets'))

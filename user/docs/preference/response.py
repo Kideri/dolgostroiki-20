@@ -8,3 +8,7 @@ class PreferenceResponseSerializer(BaseResponseSerializer):
 
     class Meta:
         ref_name = "Preference response"
+
+
+class SetPreferenceResponseSerializer(BaseResponseSerializer):
+    result = serializers.ListSerializer(child=serializers.CharField(max_length=31, help_text='Codes of set preferences'))

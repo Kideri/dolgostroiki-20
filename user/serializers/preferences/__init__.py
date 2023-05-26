@@ -1,1 +1,2 @@
 from .preference_serializer import PreferenceSerializer
+from .request import SetPreferencesRequestSerializer

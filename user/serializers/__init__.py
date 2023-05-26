@@ -5,7 +5,9 @@ from .user_info import (
 )
 from .preferences import (
     PreferenceSerializer,
+    SetPreferencesRequestSerializer
 )
 from .target import (
     TargetSerializer,
+    SetTargetsRequestSerializer
 )

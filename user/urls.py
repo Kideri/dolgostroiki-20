@@ -7,7 +7,9 @@ from user.views import (
     UpdateUserInfoView,
     UserInfoView,
     PreferencesListView,
-    TargetListView
+    SetPreferencesView,
+    TargetListView,
+    SetTargetsView,
 )
 
 urlpatterns = [
@@ -17,5 +19,7 @@ urlpatterns = [
     path("user/<int:user_id>/", OtherUserInfoView.as_view(), name="user_info"),
     path("update_me/", UpdateUserInfoView.as_view(), name="update_user_info"),
     path("preferences/", PreferencesListView.as_view(), name="preferences_list"),
+    path("set_preferences/", SetPreferencesView.as_view(), name="preferences_set"),
     path("target/", TargetListView.as_view(), name="targets_list"),
+    path("set_targets/", SetTargetsView.as_view(), name="targets_set"),
 ]

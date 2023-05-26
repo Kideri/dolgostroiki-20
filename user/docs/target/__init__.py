@@ -1,1 +1,1 @@
-from .response import TargetesponseSerializer
+from .response import TargetesponseSerializer, SetTargetResponseSerializer

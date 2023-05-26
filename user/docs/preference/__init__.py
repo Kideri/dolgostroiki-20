@@ -1,1 +1,1 @@
-from .response import PreferenceResponseSerializer
+from .response import PreferenceResponseSerializer, SetPreferenceResponseSerializer
