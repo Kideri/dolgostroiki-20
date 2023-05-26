@@ -2,7 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import mark_safe
 from django.core.validators import MinValueValidator
+
+from source.settings import MEDIA_URL
 
 from ..managers import UserManager
 from .user_role import UserRole
@@ -19,6 +22,7 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    avatar = models.ImageField(null=True)
     age = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
     role = models.CharField(max_length=1, choices=UserRole.choices, default=UserRole.default)
     last_seen = models.DateTimeField(default=timezone.now)
@@ -27,6 +31,11 @@ class User(AbstractUser):
     is_age_private = models.BooleanField(default=True)
     is_email_private = models.BooleanField(default=True)
     is_date_joined_private = models.BooleanField(default=True)
+
+    def avatar_tag(self):
+        return mark_safe(f'<img src="{MEDIA_URL}{self.avatar}" width="150" height="150" />')
+
+    avatar_tag.short_description = 'Avatar'
 
     @property
     def user_info_first_name(self):

@@ -7,15 +7,16 @@ from user.models import User
 
 class UserInfoSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
+    role = serializers.CharField(max_length=255, read_only=True)
     date_joined = serializers.DateTimeField(read_only=True)
     last_seen = serializers.DateTimeField(read_only=True)
     preferences = serializers.ListField(
         child=serializers.CharField(max_length=255), required=False, help_text="User preferences codes",
-        source="user_info_preferences"
+        source="user_info_preferences", read_only=True
     )
     targets = serializers.ListField(
         child=serializers.CharField(max_length=255), required=False, help_text="User targets codes",
-        source="user_info_targets",
+        source="user_info_targets", read_only=True
     )
 
     class Meta:
@@ -23,6 +24,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "first_name",
+            "avatar",
             "email",
             "date_joined",
             "last_seen",
@@ -50,5 +52,5 @@ class OtherUserInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "first_name", "age", "email", "username", "date_joined", "last_seen", "role")
+        fields = ("id", "avatar", "first_name", "age", "email", "username", "date_joined", "last_seen", "role")
         ref_name = "other_user_info_result"

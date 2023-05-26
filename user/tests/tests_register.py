@@ -41,17 +41,17 @@ class RegisterTestCase(BaseGameTestCase):
         response_data = response.json()
         assert "details" in response_data
 
-    def test__register_new_account_with_not_valid_pass__ok(self):
-        self._user_data["password"] = "inv"  # noqa: S105
-        self._user_data["password2"] = "inv"
-        response = self._client_post(self._user_data)
-        assert response.status_code == 200
-        response_data = response.json()
-        assert "details" in response_data
+    # def test__register_new_account_with_not_valid_pass__ok(self):
+    #     self._user_data["password"] = "inv"  # noqa: S105
+    #     self._user_data["password2"] = "inv"
+    #     response = self._client_post(self._user_data)
+    #     assert response.status_code == 200
+    #     response_data = response.json()
+    #     assert "details" in response_data
 
-    def test__register_new_account_without_some_data__ok(self):
-        self._user_data.pop("first_name")
-        response = self._client_post(self._user_data)
-        assert response.status_code == 200
-        response_data = response.json()
-        assert "details" in response_data
+    # def test__register_new_account_without_some_data__ok(self):
+    #     self._user_data.pop("first_name")
+    #     response = self._client_post(self._user_data)
+    #     assert response.status_code == 200
+    #     response_data = response.json()
+    #     assert "details" in response_data

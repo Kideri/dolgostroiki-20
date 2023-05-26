@@ -25,6 +25,7 @@ class TestSelfUserInfo(BaseGameCoreTestCase):
         expected = {
             "id": self.user.id,
             "first_name": "Test user",
+            "avatar": None,
             "age": 35,
             "email": "test@email.ru",
             "role": "D",
