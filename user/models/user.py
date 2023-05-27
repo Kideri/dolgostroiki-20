@@ -96,4 +96,4 @@ class User(AbstractUser):
     def access_token(self):
         from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-        return TokenObtainPairSerializer(self).get_token(self).access_token.token
+        return TokenObtainPairSerializer(self).get_token(self).access_token.get()
