@@ -20,6 +20,7 @@ class QuestionAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "question",
+                    "text",
                 )
             },
         ),
