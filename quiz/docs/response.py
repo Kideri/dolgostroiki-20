@@ -16,6 +16,7 @@ class QuestionAnswerDocsSerializer(serializers.Serializer):
 
 class QuestionRetrieveSerializer(serializers.Serializer):
     question = serializers.CharField(max_length=2047)
+    text = serializers.CharField()
     answers = serializers.ListSerializer(child=QuestionAnswerDocsSerializer())
     user_answers = serializers.ListSerializer(child=serializers.IntegerField(), required=False)
 

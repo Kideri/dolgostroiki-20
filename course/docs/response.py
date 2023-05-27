@@ -32,3 +32,11 @@ class RetrieveCourseDocs(ListCourseDocs):
 
 class RetrieveCourseDocsResponse(BaseResponseSerializer):
     result = RetrieveCourseDocs()
+
+
+class LessonResponseDocs(LessonDocs):
+    questions = serializers.ListSerializer(child=serializers.IntegerField())
+
+
+class RetrieveLessonDocsResponse(BaseResponseSerializer):
+    result = LessonResponseDocs()

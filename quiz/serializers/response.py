@@ -28,6 +28,7 @@ class QuestionRetrieveSerializer(serializers.ModelSerializer):
         model = Question
         fields = (
             "question",
+            "text",
             "answers",
         )
         ref_name = "question_retrieve_result"

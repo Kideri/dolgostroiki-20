@@ -27,7 +27,7 @@ class CourseRetrieveView(BaseAPIView):
         object_ = Course.objects.filter(id=self.course_id)
 
         if not object_.exists():
-            raise CustomException("question not found")
+            raise CustomException("course not found")
 
         object_ = object_.first()
 

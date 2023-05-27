@@ -1,1 +1,1 @@
-from .response import ListCourseResponse, RetrieveCourseResponse
+from .response import ListCourseResponse, RetrieveCourseResponse, LessonResponseSerializer

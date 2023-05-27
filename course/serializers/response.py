@@ -49,3 +49,19 @@ class RetrieveCourseResponse(ListCourseResponse):
         )
         ref_name = "course_list_result"
 
+
+class LessonResponseSerializer(LessonSerializer):
+    questions = serializers.ListSerializer(child=serializers.IntegerField(), source="lessons_questions")
+
+    class Meta:
+        model = Lesson
+        fields = (
+            "number",
+            "name",
+            "is_free",
+            "cost",
+            "duration",
+            "questions",
+        )
+        ref_name = "lesson_get_result"
+

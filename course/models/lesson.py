@@ -19,3 +19,7 @@ class Lesson(models.Model):
 
     class Meta:
         unique_together = ("course", "number")
+
+    @property
+    def lessons_questions(self):
+        return [_.question.id for _ in self.questions.all()]

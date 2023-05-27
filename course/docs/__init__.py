@@ -1,1 +1,1 @@
-from .response import ListCourseDocsResponse, RetrieveCourseDocsResponse
+from .response import ListCourseDocsResponse, RetrieveCourseDocsResponse, RetrieveLessonDocsResponse
