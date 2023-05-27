@@ -20,12 +20,14 @@ class UpdateUserInfoSerializer(serializers.ModelSerializer):
             "is_age_private",
             "is_email_private",
             "is_date_joined_private",
+            "is_vk_id_private",
         )
         ref_name = "user_info_update"
 
 
 class UserInfoSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
+    vk_id = serializers.IntegerField(read_only=True, required=False)
     role = serializers.CharField(max_length=255, read_only=True)
     avatar = serializers.ImageField(read_only=False)
     date_joined = serializers.DateTimeField(read_only=True)
@@ -44,6 +46,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             "id",
+            "vk_id",
             "first_name",
             "avatar",
             "email",
@@ -63,6 +66,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
 
 class OtherUserInfoSerializer(serializers.ModelSerializer):
+    vk_id = serializers.IntegerField(read_only=True, required=False, source="user_info_vk_id")
     first_name = serializers.CharField(max_length=255, source="user_info_first_name", required=False)
     age = serializers.IntegerField(source="user_info_age", required=False)
     avatar = serializers.ImageField(required=False)
@@ -75,5 +79,5 @@ class OtherUserInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "avatar", "first_name", "age", "email", "username", "date_joined", "last_seen", "role")
+        fields = ("id", "vk_id", "avatar", "first_name", "age", "email", "username", "date_joined", "last_seen", "role")
         ref_name = "other_user_info_result"
