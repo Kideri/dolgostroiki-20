@@ -26,7 +26,7 @@ class UpdateUserInfoSerializer(serializers.ModelSerializer):
 
 
 class UserInfoSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True, required=True)
+    id = serializers.IntegerField(read_only=True)
     vk_id = serializers.IntegerField(read_only=True, required=False)
     role = serializers.CharField(max_length=255, read_only=True)
     avatar = serializers.ImageField(read_only=False)
