@@ -12,7 +12,7 @@ from user.docs import LoginRequest, LoginResponseSerializer, LoginResult
 class LoginView(BaseAPIView):
     request_serializer = TokenObtainPairSerializer
     response_serializer = LoginResult
-    permission_classes: List[rest_framework.permissions.BasePermission] = []
+    permission_classes: List[rest_framework.permissions.BasePermission] = [rest_framework.permissions.AllowAny]
 
     @swagger_auto_schema(
         responses={200: LoginResponseSerializer(), 401: BaseResponseSerializer()},

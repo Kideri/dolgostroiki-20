@@ -17,7 +17,7 @@ from user.serializers import (
 class VkLoginView(BaseAPIView):
     request_serializer = VkLoginRequestSerializer
     response_serializer = None
-    permission_classes: List[rest_framework.permissions.BasePermission] = []
+    permission_classes: List[rest_framework.permissions.BasePermission] = [rest_framework.permissions.AllowAny]
 
     @swagger_auto_schema(
         responses={200: LoginResponseSerializer(), 401: BaseResponseSerializer()},

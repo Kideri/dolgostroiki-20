@@ -12,7 +12,7 @@ from user.serializers import RegisterRequest, RegisterResult
 class RegisterView(BaseAPIView):
     request_serializer = RegisterRequest
     response_serializer = RegisterResult
-    permission_classes: List[rest_framework.permissions.BasePermission] = []
+    permission_classes: List[rest_framework.permissions.BasePermission] = [rest_framework.permissions.AllowAny]
 
     @swagger_auto_schema(
         responses={200: RegisterResponseSerializer(), 401: BaseResponseSerializer()},
