@@ -29,7 +29,7 @@ class VkLoginView(BaseAPIView):
     def get_result(self):
         vk_access_token = self.get_data_from_request().data.get('vk_access_token')
 
-        url = f'https://api.vk.com/method/account.getProfileInfo?access_token={vk_access_token}'
+        url = f'https://api.vk.com/method/account.getProfileInfo?access_token={vk_access_token}&v=5.131'
 
         print(vk_access_token)
         print(requests.post(url).json())
