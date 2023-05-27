@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'quiz',
     'news',
     'levels',
+    'course',
 ]
 
 AUTH_USER_MODEL = "user.User"

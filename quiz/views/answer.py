@@ -5,6 +5,7 @@ from common.serializers import BaseResponseSerializer
 from common.views.base_api import BaseAPIView
 from quiz.docs import AnswerQuestionDocsResponseSerializer
 from quiz.models import Question, UserAnswers
+from course.models import UserPassedLessons
 from quiz.serializers import (
     AnswerQuestionResponseSerializer,
     AnswerQuestionRequestSerializer
@@ -60,6 +61,12 @@ class QuestionAnswerView(BaseAPIView):
             answers=user_answers,
             score_received=score,
         )
+
+        if object_.lesson.exists() and object_.lesson.lesson.exists():
+            UserPassedLessons.objects.create(
+                user=self.request.user,
+                lesson=object_.lesson.lesson
+            )
 
         return self.response_serializer(
             {'score': score, 'answers': object_.correct_answers_retrieve, 'reaction': reaction}

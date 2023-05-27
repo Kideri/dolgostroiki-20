@@ -9,3 +9,6 @@ class UserAnswers(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='user')
     answers = ArrayField(models.IntegerField())
     score_received = models.FloatField()
+
+    class Meta:
+        unique_together = ("user", "question")

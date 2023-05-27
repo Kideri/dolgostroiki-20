@@ -39,7 +39,7 @@ class UserAdmin(admin.ModelAdmin):
         "is_staff",
     )
     date_hierarchy = "date_joined"
-    readonly_fields = ("avatar_tag", )
+    readonly_fields = ("avatar_tag", "vk_id")
     fieldsets = (
         (
             None,
@@ -55,6 +55,7 @@ class UserAdmin(admin.ModelAdmin):
             _("Personal info"),
             {
                 "fields": (
+                    "vk_id",
                     "avatar_tag",
                     "avatar",
                     "first_name",
