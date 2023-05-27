@@ -22,7 +22,7 @@ class User(AbstractUser):
 
     objects = UserManager()
 
-    avatar = models.ImageField(null=True)
+    avatar = models.ImageField(null=True, blank=True)
     vk_id = models.IntegerField(null=True, blank=True)
     age = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
     role = models.CharField(max_length=1, choices=UserRole.choices, default=UserRole.default)
