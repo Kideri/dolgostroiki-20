@@ -21,4 +21,4 @@ class QuestionListView(BaseAPIView):
         return self.base_method()
 
     def get_result(self):
-        return [self.response_serializer(_).data for _ in Question.objects.all()]
+        return [self.response_serializer(_).data for _ in Question.objects.filter(lesson__isnull=True).all()]
