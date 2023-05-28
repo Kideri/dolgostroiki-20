@@ -22,6 +22,7 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = (
+            "id",
             "number",
             "name",
             "is_free",
