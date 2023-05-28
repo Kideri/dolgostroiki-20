@@ -13,7 +13,7 @@ class ListCourseDocs(serializers.Serializer):
 
 
 class ListCourseDocsResponse(BaseResponseSerializer):
-    result = ListCourseDocs()
+    result = serializers.ListSerializer(child=ListCourseDocs())
 
 
 class LessonDocs(serializers.Serializer):
