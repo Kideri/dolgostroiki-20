@@ -27,6 +27,8 @@ class LessonDocs(serializers.Serializer):
 
 
 class RetrieveCourseDocs(ListCourseDocs):
+    author_name = serializers.CharField(max_length=255)
+    author_description = serializers.CharField()
     lessons = serializers.ListSerializer(child=LessonDocs())
 
 

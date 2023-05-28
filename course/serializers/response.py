@@ -40,6 +40,8 @@ class RetrieveCourseResponse(ListCourseResponse):
         fields = (
             "id",
             "name",
+            "author_name",
+            "author_description",
             "difficulty",
             "tags",
             "total_lessons",
