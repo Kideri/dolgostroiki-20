@@ -12,9 +12,9 @@ class UserLevel(models.Model):
 
     def get_current_level(self):
         if not self.current_level:
-            config = Config.objects.filter(exp__gt=self.total_exp).last()
+            config = Config.objects.filter(exp__lte=self.total_exp).last()
 
-            self.current_level = config if config else Config.objects.last()
+            self.current_level = config
             self.save()
 
         return self.current_level
