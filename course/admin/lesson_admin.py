@@ -22,6 +22,7 @@ class LessonAdmin(admin.ModelAdmin):
                 "fields": (
                     "course",
                     "name",
+                    "description",
                     "number",
                     "duration",
                 )

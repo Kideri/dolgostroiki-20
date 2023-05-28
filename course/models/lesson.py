@@ -11,6 +11,7 @@ class Lesson(models.Model):
 
     number = models.IntegerField(validators=[MinValueValidator(1)])
     name = models.CharField(max_length=255)
+    description = models.TextField()
 
     is_free = models.BooleanField(default=True)
     cost = models.IntegerField(validators=[MinValueValidator(1)])

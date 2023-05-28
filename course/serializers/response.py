@@ -26,6 +26,7 @@ class LessonSerializer(serializers.ModelSerializer):
             "image",
             "number",
             "name",
+            "description",
             "is_free",
             "cost",
             "duration"

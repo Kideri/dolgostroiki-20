@@ -21,6 +21,7 @@ class LessonDocs(serializers.Serializer):
     image = serializers.ImageField()
     number = serializers.IntegerField()
     name = serializers.CharField()
+    description = serializers.CharField()
     is_free = serializers.BooleanField()
     cost = serializers.IntegerField()
     duration = serializers.IntegerField()
