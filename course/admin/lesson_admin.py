@@ -14,6 +14,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ("name", )
     list_display_links = ("name", )
     search_fields = ("name", )
+    readonly_fields = ("image_tag", )
     fieldsets = (
         (
             None,
@@ -35,13 +36,13 @@ class LessonAdmin(admin.ModelAdmin):
                 )
             }
         ),
-        # (
-        #     "External section",
-        #     {
-        #         "fields": (
-        #             "images",
-        #             "videos",
-        #         )
-        #     }
-        # )
+        (
+            "External section",
+            {
+                "fields": (
+                    "image_tag",
+                    "image",
+                )
+            }
+        )
     )

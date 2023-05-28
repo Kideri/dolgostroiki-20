@@ -34,8 +34,8 @@ class LessonRetrieveView(BaseAPIView):
         data = self.response_serializer(object_).data
 
         data.update({
-            "viewed": UserViewedLessons.objects.filter(user=self.request.user, lesson=object_),
-            "passed": UserPassedLessons.objects.filter(user=self.request.user, lesson=object_),
+            "viewed": UserViewedLessons.objects.filter(user=self.request.user, lesson=object_).exists(),
+            "passed": UserPassedLessons.objects.filter(user=self.request.user, lesson=object_).exists(),
         })
 
         return data

@@ -23,6 +23,7 @@ class LessonSerializer(serializers.ModelSerializer):
         model = Lesson
         fields = (
             "id",
+            "image",
             "number",
             "name",
             "is_free",
@@ -57,6 +58,8 @@ class LessonResponseSerializer(LessonSerializer):
     class Meta:
         model = Lesson
         fields = (
+            "id",
+            "image",
             "number",
             "name",
             "is_free",

@@ -17,6 +17,8 @@ class ListCourseDocsResponse(BaseResponseSerializer):
 
 
 class LessonDocs(serializers.Serializer):
+    id = serializers.IntegerField()
+    image = serializers.ImageField()
     number = serializers.IntegerField()
     name = serializers.CharField()
     is_free = serializers.BooleanField()
