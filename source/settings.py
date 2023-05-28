@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'news',
     'levels',
     'course',
+    'map',
 ]
 
 AUTH_USER_MODEL = "user.User"

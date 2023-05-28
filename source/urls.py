@@ -35,6 +35,7 @@ urlpatterns = [
     path("api/news/", include("news.urls")),
     path("api/quiz/", include("quiz.urls")),
     path("api/course/", include("course.urls")),
+    path("api/point/", include("map.urls")),
     path(
         "swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
