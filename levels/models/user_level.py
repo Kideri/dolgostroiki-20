@@ -11,11 +11,10 @@ class UserLevel(models.Model):
     total_exp = models.FloatField(default=0, validators=[MinValueValidator(0)])
 
     def get_current_level(self):
-        if not self.current_level:
-            config = Config.objects.filter(exp__lte=self.total_exp).last()
+        config = Config.objects.filter(exp__lte=self.total_exp).last()
 
-            self.current_level = config
-            self.save()
+        self.current_level = config
+        self.save()
 
         return self.current_level
 
