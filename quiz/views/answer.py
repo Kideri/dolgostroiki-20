@@ -62,10 +62,10 @@ class QuestionAnswerView(BaseAPIView):
             score_received=score,
         )
 
-        if object_.lesson.exists() and object_.lesson.lesson.exists():
+        if object_.lesson.exists():
             UserPassedLessons.objects.create(
                 user=self.request.user,
-                lesson=object_.lesson.lesson
+                lesson=object_.lesson
             )
 
         return self.response_serializer(

@@ -27,6 +27,7 @@ class QuestionRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = (
+            "id",
             "question",
             "text",
             "answers",

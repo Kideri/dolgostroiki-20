@@ -4,8 +4,6 @@ from course.models import Course, Lesson
 
 class ListCourseResponse(serializers.ModelSerializer):
     tags = serializers.ListSerializer(child=serializers.IntegerField(), source="course_tags")
-    total_lessons = serializers.IntegerField(source="total_lessons")
-    free_lessons = serializers.IntegerField(source="free_lessons")
 
     class Meta:
         model = Course

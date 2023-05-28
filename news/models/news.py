@@ -7,7 +7,7 @@ class News(models.Model):
 
     @property
     def tags_serialize(self):
-        return [_.tag.id for _ in self.tags]
+        return [_.tag.id for _ in self.tags.all()]
 
     @property
     def shorten_text(self):

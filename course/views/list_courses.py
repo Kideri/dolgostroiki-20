@@ -27,4 +27,5 @@ class CourseListView(BaseAPIView):
             data.update({
                 "lessons_passed": UserPassedLessons.objects.filter(user=self.request.user, lesson__course=obj).count()
             })
+            result.append(data)
         return result
