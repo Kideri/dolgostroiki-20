@@ -39,8 +39,8 @@ class CourseRetrieveView(BaseAPIView):
 
         for lesson in data["lessons"]:
             lesson.update({
-                "viewed": UserViewedLessons.objects.filter(user=self.request.user, lesson_id=lesson["id"]),
-                "passed": UserPassedLessons.objects.filter(user=self.request.user, lesson_id=lesson["id"]),
+                "viewed": UserViewedLessons.objects.filter(user=self.request.user, lesson_id=lesson["id"]).exists(),
+                "passed": UserPassedLessons.objects.filter(user=self.request.user, lesson_id=lesson["id"]).exists(),
             })
 
         return data
