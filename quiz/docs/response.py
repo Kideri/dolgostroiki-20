@@ -16,6 +16,7 @@ class QuestionAnswerDocsSerializer(serializers.Serializer):
 
 class QuestionRetrieveSerializer(serializers.Serializer):
     id = serializers.IntegerField()
+    image = serializers.ImageField()
     question = serializers.CharField(max_length=2047)
     text = serializers.CharField()
     answers = serializers.ListSerializer(child=QuestionAnswerDocsSerializer())

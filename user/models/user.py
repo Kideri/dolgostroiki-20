@@ -37,7 +37,7 @@ class User(AbstractUser):
     def avatar_tag(self):
         return mark_safe(f'<img src="{MEDIA_URL}{self.avatar}" width="150" height="150" />')
 
-    avatar_tag.short_description = 'Avatar'
+    avatar_tag.short_description = 'Avatar preview'
 
     @property
     def user_info_first_name(self):

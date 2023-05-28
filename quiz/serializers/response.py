@@ -28,6 +28,7 @@ class QuestionRetrieveSerializer(serializers.ModelSerializer):
         model = Question
         fields = (
             "id",
+            "image",
             "question",
             "text",
             "answers",

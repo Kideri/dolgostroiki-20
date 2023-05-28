@@ -14,11 +14,14 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ("question", )
     list_display_links = ("question", )
     search_fields = ("question", )
+    readonly_fields = ("image_tag", )
     fieldsets = (
         (
             None,
             {
                 "fields": (
+                    "image_tag",
+                    "image",
                     "question",
                     "text",
                 )
