@@ -11,6 +11,7 @@ class NewsListSerializer(serializers.ModelSerializer):
         model = News
         fields = (
             "id",
+            "image",
             "title",
             "text",
             "tags",
@@ -24,6 +25,7 @@ class NewsRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
         fields = (
+            "image",
             "title",
             "text",
             "tags",
