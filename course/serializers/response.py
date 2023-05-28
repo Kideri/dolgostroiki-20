@@ -63,6 +63,7 @@ class LessonResponseSerializer(LessonSerializer):
             "image",
             "number",
             "name",
+            "description",
             "is_free",
             "cost",
             "duration",
