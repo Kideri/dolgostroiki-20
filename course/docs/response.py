@@ -19,6 +19,7 @@ class ListCourseDocsResponse(BaseResponseSerializer):
 class LessonDocs(serializers.Serializer):
     id = serializers.IntegerField()
     image = serializers.ImageField()
+    video = serializers.FileField()
     number = serializers.IntegerField()
     name = serializers.CharField()
     description = serializers.CharField()
@@ -32,7 +33,6 @@ class LessonDocs(serializers.Serializer):
 class RetrieveCourseDocs(ListCourseDocs):
     author_name = serializers.CharField(max_length=255)
     author_description = serializers.CharField()
-    video = serializers.FileField()
     lessons = serializers.ListSerializer(child=LessonDocs())
 
 

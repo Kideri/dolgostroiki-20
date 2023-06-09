@@ -49,7 +49,6 @@ class RetrieveCourseResponse(ListCourseResponse):
             "total_lessons",
             "free_lessons",
             "lessons",
-            "video",
         )
         ref_name = "course_list_result"
 
@@ -62,6 +61,7 @@ class LessonResponseSerializer(LessonSerializer):
         fields = (
             "id",
             "image",
+            "video",
             "number",
             "name",
             "description",

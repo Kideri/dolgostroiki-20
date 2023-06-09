@@ -14,7 +14,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ("name", )
     list_display_links = ("name", )
     search_fields = ("name", )
-    readonly_fields = ("image_tag", )
+    readonly_fields = ("image_tag", "video_tag")
     fieldsets = (
         (
             None,
@@ -43,6 +43,8 @@ class LessonAdmin(admin.ModelAdmin):
                 "fields": (
                     "image_tag",
                     "image",
+                    "video_tag",
+                    "video",
                 )
             }
         )
