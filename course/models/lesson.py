@@ -27,7 +27,7 @@ class Lesson(models.Model):
     )
 
     def video_tag(self):
-        return mark_safe(f'<video src="{MEDIA_URL}{self.video}" width="150" height="150" />')
+        return mark_safe(f'<video src="{MEDIA_URL}{self.video}" width="150" height="150" preload controls/>')
 
     video_tag.short_description = 'Video preview'
 
