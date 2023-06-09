@@ -48,7 +48,8 @@ class RetrieveCourseResponse(ListCourseResponse):
             "tags",
             "total_lessons",
             "free_lessons",
-            "lessons"
+            "lessons",
+            "video",
         )
         ref_name = "course_list_result"
 

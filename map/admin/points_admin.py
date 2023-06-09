@@ -15,6 +15,8 @@ class PointAdmin(admin.ModelAdmin):
                     "name",
                     "description",
                     "work_time",
+                    "address",
+                    "phone_number",
                 )
             },
         ),

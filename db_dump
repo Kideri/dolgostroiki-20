@@ -1,0 +1,3141 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.0 (Debian 14.0-1.pgdg110+1)
+-- Dumped by pg_dump version 14.0 (Debian 14.0-1.pgdg110+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO "user";
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO "user";
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO "user";
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO "user";
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO "user";
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO "user";
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: course_course; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.course_course (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    author_name character varying(255) NOT NULL,
+    author_description text NOT NULL,
+    difficulty integer NOT NULL
+);
+
+
+ALTER TABLE public.course_course OWNER TO "user";
+
+--
+-- Name: course_course_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.course_course_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_course_id_seq OWNER TO "user";
+
+--
+-- Name: course_course_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.course_course_id_seq OWNED BY public.course_course.id;
+
+
+--
+-- Name: course_coursetag; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.course_coursetag (
+    id bigint NOT NULL,
+    course_id bigint NOT NULL,
+    tag_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.course_coursetag OWNER TO "user";
+
+--
+-- Name: course_coursetag_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.course_coursetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_coursetag_id_seq OWNER TO "user";
+
+--
+-- Name: course_coursetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.course_coursetag_id_seq OWNED BY public.course_coursetag.id;
+
+
+--
+-- Name: course_lesson; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.course_lesson (
+    id bigint NOT NULL,
+    number integer NOT NULL,
+    name character varying(255) NOT NULL,
+    is_free boolean NOT NULL,
+    cost integer NOT NULL,
+    duration integer NOT NULL,
+    course_id bigint NOT NULL,
+    image character varying(100),
+    description text NOT NULL
+);
+
+
+ALTER TABLE public.course_lesson OWNER TO "user";
+
+--
+-- Name: course_lesson_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.course_lesson_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_lesson_id_seq OWNER TO "user";
+
+--
+-- Name: course_lesson_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.course_lesson_id_seq OWNED BY public.course_lesson.id;
+
+
+--
+-- Name: course_lessonquestion; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.course_lessonquestion (
+    id bigint NOT NULL,
+    lesson_id bigint NOT NULL,
+    question_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.course_lessonquestion OWNER TO "user";
+
+--
+-- Name: course_lessonquestion_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.course_lessonquestion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_lessonquestion_id_seq OWNER TO "user";
+
+--
+-- Name: course_lessonquestion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.course_lessonquestion_id_seq OWNED BY public.course_lessonquestion.id;
+
+
+--
+-- Name: course_userpassedlessons; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.course_userpassedlessons (
+    id bigint NOT NULL,
+    lesson_id bigint NOT NULL,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.course_userpassedlessons OWNER TO "user";
+
+--
+-- Name: course_userpassedlessons_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.course_userpassedlessons_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_userpassedlessons_id_seq OWNER TO "user";
+
+--
+-- Name: course_userpassedlessons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.course_userpassedlessons_id_seq OWNED BY public.course_userpassedlessons.id;
+
+
+--
+-- Name: course_userviewedlessons; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.course_userviewedlessons (
+    id bigint NOT NULL,
+    lesson_id bigint NOT NULL,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.course_userviewedlessons OWNER TO "user";
+
+--
+-- Name: course_userviewedlessons_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.course_userviewedlessons_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_userviewedlessons_id_seq OWNER TO "user";
+
+--
+-- Name: course_userviewedlessons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.course_userviewedlessons_id_seq OWNED BY public.course_userviewedlessons.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id bigint NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO "user";
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO "user";
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO "user";
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO "user";
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO "user";
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO "user";
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO "user";
+
+--
+-- Name: levels_config; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.levels_config (
+    id bigint NOT NULL,
+    level integer NOT NULL,
+    exp bigint NOT NULL,
+    description character varying(2047),
+    CONSTRAINT levels_config_exp_check CHECK ((exp >= 0)),
+    CONSTRAINT levels_config_level_check CHECK ((level >= 0))
+);
+
+
+ALTER TABLE public.levels_config OWNER TO "user";
+
+--
+-- Name: levels_config_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.levels_config_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.levels_config_id_seq OWNER TO "user";
+
+--
+-- Name: levels_config_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.levels_config_id_seq OWNED BY public.levels_config.id;
+
+
+--
+-- Name: levels_userlevel; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.levels_userlevel (
+    id bigint NOT NULL,
+    total_exp double precision NOT NULL,
+    current_level_id bigint,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.levels_userlevel OWNER TO "user";
+
+--
+-- Name: levels_userlevel_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.levels_userlevel_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.levels_userlevel_id_seq OWNER TO "user";
+
+--
+-- Name: levels_userlevel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.levels_userlevel_id_seq OWNED BY public.levels_userlevel.id;
+
+
+--
+-- Name: map_point; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.map_point (
+    id bigint NOT NULL,
+    longitude double precision NOT NULL,
+    latitude double precision NOT NULL,
+    name character varying(255) NOT NULL,
+    description text NOT NULL,
+    work_time character varying(2047) NOT NULL
+);
+
+
+ALTER TABLE public.map_point OWNER TO "user";
+
+--
+-- Name: map_point_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.map_point_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.map_point_id_seq OWNER TO "user";
+
+--
+-- Name: map_point_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.map_point_id_seq OWNED BY public.map_point.id;
+
+
+--
+-- Name: news_news; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.news_news (
+    id bigint NOT NULL,
+    title character varying(255) NOT NULL,
+    text text NOT NULL,
+    image character varying(100)
+);
+
+
+ALTER TABLE public.news_news OWNER TO "user";
+
+--
+-- Name: news_news_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.news_news_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.news_news_id_seq OWNER TO "user";
+
+--
+-- Name: news_news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.news_news_id_seq OWNED BY public.news_news.id;
+
+
+--
+-- Name: news_newspreferences; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.news_newspreferences (
+    id bigint NOT NULL,
+    news_id bigint NOT NULL,
+    preference_id character varying(31) NOT NULL
+);
+
+
+ALTER TABLE public.news_newspreferences OWNER TO "user";
+
+--
+-- Name: news_newspreferences_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.news_newspreferences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.news_newspreferences_id_seq OWNER TO "user";
+
+--
+-- Name: news_newspreferences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.news_newspreferences_id_seq OWNED BY public.news_newspreferences.id;
+
+
+--
+-- Name: news_newstags; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.news_newstags (
+    id bigint NOT NULL,
+    news_id bigint NOT NULL,
+    tag_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.news_newstags OWNER TO "user";
+
+--
+-- Name: news_newstags_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.news_newstags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.news_newstags_id_seq OWNER TO "user";
+
+--
+-- Name: news_newstags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.news_newstags_id_seq OWNED BY public.news_newstags.id;
+
+
+--
+-- Name: news_tag; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.news_tag (
+    id bigint NOT NULL,
+    title character varying(255) NOT NULL,
+    background_color character varying(18) NOT NULL
+);
+
+
+ALTER TABLE public.news_tag OWNER TO "user";
+
+--
+-- Name: news_tag_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.news_tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.news_tag_id_seq OWNER TO "user";
+
+--
+-- Name: news_tag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.news_tag_id_seq OWNED BY public.news_tag.id;
+
+
+--
+-- Name: quiz_answer; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.quiz_answer (
+    id bigint NOT NULL,
+    text character varying(255) NOT NULL,
+    is_correct boolean NOT NULL,
+    question_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.quiz_answer OWNER TO "user";
+
+--
+-- Name: quiz_answer_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.quiz_answer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.quiz_answer_id_seq OWNER TO "user";
+
+--
+-- Name: quiz_answer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.quiz_answer_id_seq OWNED BY public.quiz_answer.id;
+
+
+--
+-- Name: quiz_question; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.quiz_question (
+    id bigint NOT NULL,
+    question character varying(2047) NOT NULL,
+    correct_answer_reaction character varying(2047),
+    incorrect_answer_reaction character varying(2047),
+    score integer NOT NULL,
+    text text NOT NULL,
+    image character varying(100),
+    CONSTRAINT quiz_question_score_check CHECK ((score >= 0))
+);
+
+
+ALTER TABLE public.quiz_question OWNER TO "user";
+
+--
+-- Name: quiz_question_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.quiz_question_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.quiz_question_id_seq OWNER TO "user";
+
+--
+-- Name: quiz_question_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.quiz_question_id_seq OWNED BY public.quiz_question.id;
+
+
+--
+-- Name: quiz_useranswers; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.quiz_useranswers (
+    id bigint NOT NULL,
+    answers integer[] NOT NULL,
+    score_received double precision NOT NULL,
+    question_id bigint NOT NULL,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.quiz_useranswers OWNER TO "user";
+
+--
+-- Name: quiz_useranswers_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.quiz_useranswers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.quiz_useranswers_id_seq OWNER TO "user";
+
+--
+-- Name: quiz_useranswers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.quiz_useranswers_id_seq OWNED BY public.quiz_useranswers.id;
+
+
+--
+-- Name: user_preference; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_preference (
+    code character varying(31) NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.user_preference OWNER TO "user";
+
+--
+-- Name: user_target; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_target (
+    code character varying(31) NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.user_target OWNER TO "user";
+
+--
+-- Name: user_user; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_user (
+    id bigint NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    first_name character varying(150),
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    role character varying(1) NOT NULL,
+    last_seen timestamp with time zone NOT NULL,
+    is_first_name_private boolean NOT NULL,
+    is_email_private boolean NOT NULL,
+    is_date_joined_private boolean NOT NULL,
+    age integer,
+    is_age_private boolean NOT NULL,
+    avatar character varying(100),
+    is_vk_id_private boolean NOT NULL,
+    vk_id integer
+);
+
+
+ALTER TABLE public.user_user OWNER TO "user";
+
+--
+-- Name: user_user_groups; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_user_groups (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.user_user_groups OWNER TO "user";
+
+--
+-- Name: user_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.user_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_user_groups_id_seq OWNER TO "user";
+
+--
+-- Name: user_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.user_user_groups_id_seq OWNED BY public.user_user_groups.id;
+
+
+--
+-- Name: user_user_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.user_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_user_id_seq OWNER TO "user";
+
+--
+-- Name: user_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.user_user_id_seq OWNED BY public.user_user.id;
+
+
+--
+-- Name: user_user_user_permissions; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_user_user_permissions (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.user_user_user_permissions OWNER TO "user";
+
+--
+-- Name: user_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.user_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_user_user_permissions_id_seq OWNER TO "user";
+
+--
+-- Name: user_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.user_user_user_permissions_id_seq OWNED BY public.user_user_user_permissions.id;
+
+
+--
+-- Name: user_userpreferences; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_userpreferences (
+    id bigint NOT NULL,
+    preference_id character varying(31) NOT NULL,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.user_userpreferences OWNER TO "user";
+
+--
+-- Name: user_userpreferences_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.user_userpreferences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_userpreferences_id_seq OWNER TO "user";
+
+--
+-- Name: user_userpreferences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.user_userpreferences_id_seq OWNED BY public.user_userpreferences.id;
+
+
+--
+-- Name: user_usertargets; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_usertargets (
+    id bigint NOT NULL,
+    target_id character varying(31) NOT NULL,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.user_usertargets OWNER TO "user";
+
+--
+-- Name: user_usertargets_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+CREATE SEQUENCE public.user_usertargets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_usertargets_id_seq OWNER TO "user";
+
+--
+-- Name: user_usertargets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.user_usertargets_id_seq OWNED BY public.user_usertargets.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: course_course id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_course ALTER COLUMN id SET DEFAULT nextval('public.course_course_id_seq'::regclass);
+
+
+--
+-- Name: course_coursetag id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_coursetag ALTER COLUMN id SET DEFAULT nextval('public.course_coursetag_id_seq'::regclass);
+
+
+--
+-- Name: course_lesson id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lesson ALTER COLUMN id SET DEFAULT nextval('public.course_lesson_id_seq'::regclass);
+
+
+--
+-- Name: course_lessonquestion id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lessonquestion ALTER COLUMN id SET DEFAULT nextval('public.course_lessonquestion_id_seq'::regclass);
+
+
+--
+-- Name: course_userpassedlessons id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userpassedlessons ALTER COLUMN id SET DEFAULT nextval('public.course_userpassedlessons_id_seq'::regclass);
+
+
+--
+-- Name: course_userviewedlessons id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userviewedlessons ALTER COLUMN id SET DEFAULT nextval('public.course_userviewedlessons_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: levels_config id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_config ALTER COLUMN id SET DEFAULT nextval('public.levels_config_id_seq'::regclass);
+
+
+--
+-- Name: levels_userlevel id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_userlevel ALTER COLUMN id SET DEFAULT nextval('public.levels_userlevel_id_seq'::regclass);
+
+
+--
+-- Name: map_point id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.map_point ALTER COLUMN id SET DEFAULT nextval('public.map_point_id_seq'::regclass);
+
+
+--
+-- Name: news_news id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_news ALTER COLUMN id SET DEFAULT nextval('public.news_news_id_seq'::regclass);
+
+
+--
+-- Name: news_newspreferences id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newspreferences ALTER COLUMN id SET DEFAULT nextval('public.news_newspreferences_id_seq'::regclass);
+
+
+--
+-- Name: news_newstags id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newstags ALTER COLUMN id SET DEFAULT nextval('public.news_newstags_id_seq'::regclass);
+
+
+--
+-- Name: news_tag id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_tag ALTER COLUMN id SET DEFAULT nextval('public.news_tag_id_seq'::regclass);
+
+
+--
+-- Name: quiz_answer id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_answer ALTER COLUMN id SET DEFAULT nextval('public.quiz_answer_id_seq'::regclass);
+
+
+--
+-- Name: quiz_question id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_question ALTER COLUMN id SET DEFAULT nextval('public.quiz_question_id_seq'::regclass);
+
+
+--
+-- Name: quiz_useranswers id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_useranswers ALTER COLUMN id SET DEFAULT nextval('public.quiz_useranswers_id_seq'::regclass);
+
+
+--
+-- Name: user_user id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user ALTER COLUMN id SET DEFAULT nextval('public.user_user_id_seq'::regclass);
+
+
+--
+-- Name: user_user_groups id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_groups ALTER COLUMN id SET DEFAULT nextval('public.user_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: user_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.user_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: user_userpreferences id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_userpreferences ALTER COLUMN id SET DEFAULT nextval('public.user_userpreferences_id_seq'::regclass);
+
+
+--
+-- Name: user_usertargets id; Type: DEFAULT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_usertargets ALTER COLUMN id SET DEFAULT nextval('public.user_usertargets_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+1	admin
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+1	1	1
+2	1	2
+3	1	3
+4	1	4
+5	1	5
+6	1	6
+7	1	7
+8	1	8
+9	1	9
+10	1	10
+11	1	11
+12	1	12
+13	1	13
+14	1	14
+15	1	15
+16	1	16
+17	1	17
+18	1	18
+19	1	19
+20	1	20
+21	1	21
+22	1	22
+23	1	23
+24	1	24
+25	1	25
+26	1	26
+27	1	27
+28	1	28
+29	1	29
+30	1	30
+31	1	31
+32	1	32
+33	1	33
+34	1	34
+35	1	35
+36	1	36
+37	1	37
+38	1	38
+39	1	39
+40	1	40
+41	1	41
+42	1	42
+43	1	43
+44	1	44
+45	1	45
+46	1	46
+47	1	47
+48	1	48
+49	1	49
+50	1	50
+51	1	51
+52	1	52
+53	1	53
+54	1	54
+55	1	55
+56	1	56
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add content type	4	add_contenttype
+14	Can change content type	4	change_contenttype
+15	Can delete content type	4	delete_contenttype
+16	Can view content type	4	view_contenttype
+17	Can add session	5	add_session
+18	Can change session	5	change_session
+19	Can delete session	5	delete_session
+20	Can view session	5	view_session
+21	Can add user	6	add_user
+22	Can change user	6	change_user
+23	Can delete user	6	delete_user
+24	Can view user	6	view_user
+25	Can add preference	7	add_preference
+26	Can change preference	7	change_preference
+27	Can delete preference	7	delete_preference
+28	Can view preference	7	view_preference
+29	Can add user preferences	8	add_userpreferences
+30	Can change user preferences	8	change_userpreferences
+31	Can delete user preferences	8	delete_userpreferences
+32	Can view user preferences	8	view_userpreferences
+33	Can add target	9	add_target
+34	Can change target	9	change_target
+35	Can delete target	9	delete_target
+36	Can view target	9	view_target
+37	Can add user targets	10	add_usertargets
+38	Can change user targets	10	change_usertargets
+39	Can delete user targets	10	delete_usertargets
+40	Can view user targets	10	view_usertargets
+41	Can add question	11	add_question
+42	Can change question	11	change_question
+43	Can delete question	11	delete_question
+44	Can view question	11	view_question
+45	Can add answer	12	add_answer
+46	Can change answer	12	change_answer
+47	Can delete answer	12	delete_answer
+48	Can view answer	12	view_answer
+49	Can add news	13	add_news
+50	Can change news	13	change_news
+51	Can delete news	13	delete_news
+52	Can view news	13	view_news
+53	Can add news preferences	14	add_newspreferences
+54	Can change news preferences	14	change_newspreferences
+55	Can delete news preferences	14	delete_newspreferences
+56	Can view news preferences	14	view_newspreferences
+57	Can add user answers	15	add_useranswers
+58	Can change user answers	15	change_useranswers
+59	Can delete user answers	15	delete_useranswers
+60	Can view user answers	15	view_useranswers
+61	Can add tag	16	add_tag
+62	Can change tag	16	change_tag
+63	Can delete tag	16	delete_tag
+64	Can view tag	16	view_tag
+65	Can add news tags	17	add_newstags
+66	Can change news tags	17	change_newstags
+67	Can delete news tags	17	delete_newstags
+68	Can view news tags	17	view_newstags
+69	Can add config	18	add_config
+70	Can change config	18	change_config
+71	Can delete config	18	delete_config
+72	Can view config	18	view_config
+73	Can add user level	19	add_userlevel
+74	Can change user level	19	change_userlevel
+75	Can delete user level	19	delete_userlevel
+76	Can view user level	19	view_userlevel
+77	Can add course	20	add_course
+78	Can change course	20	change_course
+79	Can delete course	20	delete_course
+80	Can view course	20	view_course
+81	Can add lesson	21	add_lesson
+82	Can change lesson	21	change_lesson
+83	Can delete lesson	21	delete_lesson
+84	Can view lesson	21	view_lesson
+85	Can add lesson question	22	add_lessonquestion
+86	Can change lesson question	22	change_lessonquestion
+87	Can delete lesson question	22	delete_lessonquestion
+88	Can view lesson question	22	view_lessonquestion
+89	Can add user viewed lessons	23	add_userviewedlessons
+90	Can change user viewed lessons	23	change_userviewedlessons
+91	Can delete user viewed lessons	23	delete_userviewedlessons
+92	Can view user viewed lessons	23	view_userviewedlessons
+93	Can add user passed lessons	24	add_userpassedlessons
+94	Can change user passed lessons	24	change_userpassedlessons
+95	Can delete user passed lessons	24	delete_userpassedlessons
+96	Can view user passed lessons	24	view_userpassedlessons
+97	Can add course tag	25	add_coursetag
+98	Can change course tag	25	change_coursetag
+99	Can delete course tag	25	delete_coursetag
+100	Can view course tag	25	view_coursetag
+101	Can add point	26	add_point
+102	Can change point	26	change_point
+103	Can delete point	26	delete_point
+104	Can view point	26	view_point
+\.
+
+
+--
+-- Data for Name: course_course; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.course_course (id, name, author_name, author_description, difficulty) FROM stdin;
+1	Музыкальные инструменты эпохи Возрождения	Виктория Игоревна Саранская	Заведующая хоровым отделом “Детской музыкальной школы им. Шебалина”\r\n\r\nОкончила МГК им. П.И. Чайковского (2020 г.)\r\nпо специальности «Художественное руководство оперно-симфоническим оркестром и академическим хором»	2
+\.
+
+
+--
+-- Data for Name: course_coursetag; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.course_coursetag (id, course_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: course_lesson; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.course_lesson (id, number, name, is_free, cost, duration, course_id, image, description) FROM stdin;
+1	1	3 основные группы инструментов	t	50	5	1	question/image_103.png	Инструменты эпохи Возрождения делят на три группы:\r\n\r\n1. Струнные инструменты (лира, виола, бас-виола, скрипка).\r\n\r\n2. Духовые инструменты (духовое переплетение, духовые органы, корнет, труба).\r\n\r\n3. Клавишные инструменты (клавесин, цербер, фортепиано, фортепиано барокко).
+2	2	Подробное строение органа	f	100	10	1	question/organ2-590x330.jpg	Курс "Подробное строение органа" предлагает углубленное изучение анатомии и механизмов этого великолепного музыкального инструмента. Орган - это одно из самых мощных и впечатляющих средств музыкального выражения, и понимание его внутреннего устройства и работы поможет студентам полностью осознать его потенциал и красоту.\r\n\r\nВ ходе курса студенты будут знакомиться с различными компонентами органа, такими как мануалы, клавиатура, регистры, педали, трактатура, воздушные каналы и т.д. Будет проведен подробный анализ механизмов, которые отвечают за производство звука и контроль над ним, а также за изменение тембра и громкости.\r\n\r\nСтуденты изучат особенности различных типов органов, исторические аспекты и развитие инструмента, а также его роль в классической и современной музыке. Будут рассмотрены различные стили и жанры, в которых орган широко применяется.\r\n\r\nВ рамках практических занятий студенты будут иметь возможность самостоятельно исследовать органы, разбирать и собирать их компоненты, изучать принципы настройки и обслуживания инструмента.\r\n\r\nКурс "Подробное строение органа" предназначен для музыкантов, студентов музыкальных учебных заведений, звукорежиссеров и всех, кто интересуется углубленным пониманием этого удивительного музыкального инструмента. После его окончания студенты получат не только теоретические знания, но и практические навыки, которые помогут им в дальнейшей карьере и творческом росте.\r\n\r\nТеги: орган, музыкальные инструменты, анатомия, механизмы, тембр, музыкальная академия, звукорежиссура.
+\.
+
+
+--
+-- Data for Name: course_lessonquestion; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.course_lessonquestion (id, lesson_id, question_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: course_userpassedlessons; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.course_userpassedlessons (id, lesson_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: course_userviewedlessons; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.course_userviewedlessons (id, lesson_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2023-05-25 16:35:55.579806+00	3	user@example.com	2	[{"changed": {"fields": ["Staff status"]}}]	6	2
+2	2023-05-25 16:39:14.902694+00	3	user@example.com	2	[{"changed": {"fields": ["Role"]}}]	6	2
+3	2023-05-25 16:39:38.625237+00	1	admin	1	[{"added": {}}]	3	2
+4	2023-05-25 16:39:48.843623+00	3	user@example.com	2	[{"changed": {"fields": ["Role"]}}]	6	2
+5	2023-05-25 16:40:08.016181+00	3	user@example.com	2	[{"changed": {"fields": ["Staff status"]}}]	6	2
+6	2023-05-25 16:43:50.264411+00	3	user@example.com	2	[{"changed": {"fields": ["Staff status", "Superuser status"]}}]	6	2
+7	2023-05-27 14:32:40.354967+00	9	srg.grch@gmail.com	2	[{"changed": {"fields": ["Staff status", "Superuser status"]}}]	6	2
+8	2023-05-27 15:19:44.568705+00	0	0 | 🎶 Музыка	1	[{"added": {}}]	9	9
+9	2023-05-27 15:20:05.935938+00	1	1 | 🩰 Хореография	1	[{"added": {}}]	9	9
+10	2023-05-27 15:20:11.116521+00	2	2 | 🎨 Живопись	1	[{"added": {}}]	9	9
+11	2023-05-27 15:20:16.344404+00	3	3 | 🎭 Театр	1	[{"added": {}}]	9	9
+12	2023-05-27 15:20:22.928536+00	4	4 | ✍️ Дизайн	1	[{"added": {}}]	9	9
+13	2023-05-27 15:20:26.282814+00	5	5 | 🏛️ Архитектура	1	[{"added": {}}]	9	9
+14	2023-05-27 15:25:46.683584+00	5	5 | 🏛️ Архитектура	3		9	9
+15	2023-05-27 15:25:46.687362+00	4	4 | ✍️ Дизайн	3		9	9
+16	2023-05-27 15:25:46.68971+00	3	3 | 🎭 Театр	3		9	9
+17	2023-05-27 15:25:46.692196+00	2	2 | 🎨 Живопись	3		9	9
+18	2023-05-27 15:25:46.694944+00	1	1 | 🩰 Хореография	3		9	9
+19	2023-05-27 15:25:46.697638+00	0	0 | 🎶 Музыка	3		9	9
+20	2023-05-27 15:26:19.670135+00	1	1 | 🎶 Музыка	1	[{"added": {}}]	7	9
+21	2023-05-27 15:26:24.358164+00	2	2 | 🩰 Хореография	1	[{"added": {}}]	7	9
+22	2023-05-27 15:26:34.491666+00	2	2 | 🩰 Хореография	2	[]	7	9
+23	2023-05-27 15:26:43.916852+00	3	3 | 🎨 Живопись	1	[{"added": {}}]	7	9
+24	2023-05-27 15:26:48.364264+00	4	4 | 🎭 Театр	1	[{"added": {}}]	7	9
+25	2023-05-27 15:26:52.803668+00	5	5 | ✍️ Дизайн	1	[{"added": {}}]	7	9
+26	2023-05-27 15:27:09.13378+00	1	1 | Просто так	1	[{"added": {}}]	9	9
+27	2023-05-27 15:27:13.442408+00	2	2 | Для саморазвития	1	[{"added": {}}]	9	9
+28	2023-05-27 15:27:18.636399+00	3	3 | Я родитель	1	[{"added": {}}]	9	9
+29	2023-05-27 15:27:53.091668+00	4	4 | Учусь в МШИ	1	[{"added": {}}]	9	9
+30	2023-05-27 15:27:57.543144+00	5	5 | Собираюсь поступать в МШИ	1	[{"added": {}}]	9	9
+31	2023-05-27 20:31:05.513987+00	1	Tag object (1)	1	[{"added": {}}]	16	9
+32	2023-05-27 20:31:21.948908+00	2	Tag object (2)	1	[{"added": {}}]	16	9
+33	2023-05-27 20:31:43.090334+00	1	News object (1)	1	[{"added": {}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (1)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (2)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (3)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (4)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (5)"}}, {"added": {"name": "news tags", "object": "NewsTags object (1)"}}, {"added": {"name": "news tags", "object": "NewsTags object (2)"}}]	13	9
+34	2023-05-27 20:32:44.96384+00	1	Question object (1)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (1)"}}, {"added": {"name": "answer", "object": "Answer object (2)"}}, {"added": {"name": "answer", "object": "Answer object (3)"}}]	11	9
+35	2023-05-27 21:24:06.128853+00	1	Course object (1)	1	[{"added": {}}]	20	3
+36	2023-05-27 21:31:54.256107+00	1	Lesson object (1)	1	[{"added": {}}, {"added": {"name": "lesson question", "object": "LessonQuestion object (1)"}}]	21	3
+37	2023-05-28 12:40:05.317458+00	1	Lesson object (1)	2	[{"deleted": {"name": "lesson question", "object": "LessonQuestion object (None)"}}]	21	9
+38	2023-05-28 16:48:39.926632+00	2	Question object (2)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (4)"}}, {"added": {"name": "answer", "object": "Answer object (5)"}}, {"added": {"name": "answer", "object": "Answer object (6)"}}]	11	9
+39	2023-05-28 16:49:24.413922+00	3	Question object (3)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (7)"}}, {"added": {"name": "answer", "object": "Answer object (8)"}}, {"added": {"name": "answer", "object": "Answer object (9)"}}]	11	9
+40	2023-05-28 16:49:50.22173+00	4	Question object (4)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (10)"}}, {"added": {"name": "answer", "object": "Answer object (11)"}}, {"added": {"name": "answer", "object": "Answer object (12)"}}]	11	9
+41	2023-05-28 16:50:28.523393+00	3	Question object (3)	2	[{"changed": {"name": "answer", "object": "Answer object (9)", "fields": ["Is correct"]}}]	11	9
+42	2023-05-28 16:51:11.32134+00	5	Question object (5)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (13)"}}, {"added": {"name": "answer", "object": "Answer object (14)"}}, {"added": {"name": "answer", "object": "Answer object (15)"}}]	11	9
+43	2023-05-28 16:53:01.409991+00	6	Question object (6)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (16)"}}, {"added": {"name": "answer", "object": "Answer object (17)"}}, {"added": {"name": "answer", "object": "Answer object (18)"}}]	11	9
+44	2023-05-28 16:53:52.194414+00	7	Question object (7)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (19)"}}, {"added": {"name": "answer", "object": "Answer object (20)"}}, {"added": {"name": "answer", "object": "Answer object (21)"}}]	11	9
+45	2023-05-28 16:54:10.834175+00	8	Question object (8)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (22)"}}, {"added": {"name": "answer", "object": "Answer object (23)"}}, {"added": {"name": "answer", "object": "Answer object (24)"}}]	11	9
+46	2023-05-28 16:55:03.354005+00	9	Question object (9)	1	[{"added": {}}, {"added": {"name": "answer", "object": "Answer object (25)"}}, {"added": {"name": "answer", "object": "Answer object (26)"}}, {"added": {"name": "answer", "object": "Answer object (27)"}}]	11	9
+47	2023-05-28 16:58:39.102009+00	1	Lesson object (1)	2	[{"changed": {"fields": ["Cost"]}}]	21	3
+48	2023-05-28 16:58:40.983668+00	1	Question object (1)	2	[{"changed": {"fields": ["Image"]}}]	11	2
+49	2023-05-28 17:01:34.317894+00	2	Lesson object (2)	1	[{"added": {}}]	21	3
+50	2023-05-28 17:01:53.89368+00	3	Tag object (3)	1	[{"added": {}}]	16	9
+51	2023-05-28 17:02:03.170807+00	4	Tag object (4)	1	[{"added": {}}]	16	9
+52	2023-05-28 17:02:06.853243+00	2	News object (2)	1	[{"added": {}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (6)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (7)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (8)"}}, {"added": {"name": "news tags", "object": "NewsTags object (3)"}}, {"added": {"name": "news tags", "object": "NewsTags object (4)"}}]	13	9
+53	2023-05-28 17:02:43.631907+00	2	News object (2)	2	[{"changed": {"fields": ["Image"]}}]	13	9
+54	2023-05-28 17:04:01.577316+00	2	News object (2)	2	[{"changed": {"fields": ["Image"]}}]	13	9
+55	2023-05-28 17:04:33.698976+00	1	News object (1)	2	[{"changed": {"fields": ["Image"]}}]	13	9
+56	2023-05-28 17:05:03.156832+00	5	Tag object (5)	1	[{"added": {}}]	16	9
+57	2023-05-28 17:05:11.2755+00	6	Tag object (6)	1	[{"added": {}}]	16	9
+58	2023-05-28 17:05:23.313737+00	2	Lesson object (2)	2	[{"changed": {"fields": ["Is free"]}}]	21	3
+59	2023-05-28 17:05:46.450187+00	3	News object (3)	1	[{"added": {}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (9)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (10)"}}, {"added": {"name": "news tags", "object": "NewsTags object (5)"}}, {"added": {"name": "news tags", "object": "NewsTags object (6)"}}]	13	9
+60	2023-05-28 17:07:19.835144+00	7	Tag object (7)	1	[{"added": {}}]	16	9
+61	2023-05-28 17:07:26.923712+00	8	Tag object (8)	1	[{"added": {}}]	16	9
+62	2023-05-28 17:07:44.259064+00	4	News object (4)	1	[{"added": {}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (11)"}}, {"added": {"name": "news tags", "object": "NewsTags object (7)"}}, {"added": {"name": "news tags", "object": "NewsTags object (8)"}}]	13	9
+63	2023-05-28 17:10:35.050422+00	1	Config object (1)	1	[{"added": {}}]	18	2
+64	2023-05-28 17:10:47.961953+00	2	Config object (2)	1	[{"added": {}}]	18	2
+65	2023-05-28 17:10:55.792436+00	4	News object (4)	2	[{"changed": {"fields": ["Image"]}}]	13	9
+66	2023-05-28 17:11:38.23238+00	9	Tag object (9)	1	[{"added": {}}]	16	9
+67	2023-05-28 17:11:43.710104+00	10	Tag object (10)	1	[{"added": {}}]	16	9
+68	2023-05-28 17:12:58.908139+00	5	News object (5)	1	[{"added": {}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (12)"}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (13)"}}, {"added": {"name": "news tags", "object": "NewsTags object (9)"}}, {"added": {"name": "news tags", "object": "NewsTags object (10)"}}]	13	9
+69	2023-05-28 17:14:27.578361+00	11	Tag object (11)	1	[{"added": {}}]	16	9
+70	2023-05-28 17:14:32.305123+00	6	News object (6)	1	[{"added": {}}, {"added": {"name": "news preferences", "object": "NewsPreferences object (14)"}}, {"added": {"name": "news tags", "object": "NewsTags object (11)"}}]	13	9
+71	2023-05-28 17:15:38.175627+00	6	News object (6)	2	[]	13	9
+72	2023-05-28 17:26:34.871632+00	1	Question object (1)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+73	2023-05-28 17:27:23.467079+00	2	Question object (2)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+74	2023-05-28 17:27:49.276329+00	3	Question object (3)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+75	2023-05-28 17:28:11.235653+00	4	Question object (4)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+76	2023-05-28 17:28:26.708684+00	5	Question object (5)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+77	2023-05-28 17:28:46.434928+00	6	Question object (6)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+78	2023-05-28 17:29:10.086135+00	7	Question object (7)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+79	2023-05-28 17:29:24.552822+00	8	Question object (8)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+80	2023-05-28 17:29:47.238138+00	9	Question object (9)	2	[{"changed": {"fields": ["Image"]}}]	11	9
+81	2023-05-28 18:12:32.6744+00	2	Lesson object (2)	2	[{"changed": {"fields": ["Description"]}}]	21	3
+82	2023-05-28 18:24:28.113835+00	1	Lesson object (1)	2	[{"changed": {"fields": ["Description", "Image"]}}]	21	3
+83	2023-05-28 19:07:38.562217+00	2	Lesson object (2)	2	[{"changed": {"fields": ["Description", "Image"]}}]	21	3
+84	2023-05-28 19:47:12.98441+00	6	News object (6)	2	[{"changed": {"fields": ["Image"]}}]	13	9
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	contenttypes	contenttype
+5	sessions	session
+6	user	user
+7	user	preference
+8	user	userpreferences
+9	user	target
+10	user	usertargets
+11	quiz	question
+12	quiz	answer
+13	news	news
+14	news	newspreferences
+15	quiz	useranswers
+16	news	tag
+17	news	newstags
+18	levels	config
+19	levels	userlevel
+20	course	course
+21	course	lesson
+22	course	lessonquestion
+23	course	userviewedlessons
+24	course	userpassedlessons
+25	course	coursetag
+26	map	point
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2023-05-25 16:02:53.792349+00
+2	contenttypes	0002_remove_content_type_name	2023-05-25 16:02:53.804166+00
+3	auth	0001_initial	2023-05-25 16:02:53.854591+00
+4	auth	0002_alter_permission_name_max_length	2023-05-25 16:02:53.863101+00
+5	auth	0003_alter_user_email_max_length	2023-05-25 16:02:53.871509+00
+6	auth	0004_alter_user_username_opts	2023-05-25 16:02:53.883561+00
+7	auth	0005_alter_user_last_login_null	2023-05-25 16:02:53.891795+00
+8	auth	0006_require_contenttypes_0002	2023-05-25 16:02:53.894711+00
+9	auth	0007_alter_validators_add_error_messages	2023-05-25 16:02:53.904012+00
+10	auth	0008_alter_user_username_max_length	2023-05-25 16:02:53.914543+00
+11	auth	0009_alter_user_last_name_max_length	2023-05-25 16:02:53.925391+00
+12	auth	0010_alter_group_name_max_length	2023-05-25 16:02:53.937846+00
+13	auth	0011_update_proxy_permissions	2023-05-25 16:02:53.948438+00
+14	auth	0012_alter_user_first_name_max_length	2023-05-25 16:02:53.961808+00
+15	user	0001_initial	2023-05-25 16:02:54.013854+00
+16	admin	0001_initial	2023-05-25 16:02:54.044459+00
+17	admin	0002_logentry_remove_auto_add	2023-05-25 16:02:54.055477+00
+18	admin	0003_logentry_add_action_flag_choices	2023-05-25 16:02:54.067782+00
+19	user	0002_alter_user_managers_remove_user_username_and_more	2023-05-25 16:02:54.107441+00
+20	user	0003_remove_user_is_last_name_private_and_more	2023-05-25 16:02:54.151421+00
+21	user	0004_alter_user_is_age_private	2023-05-25 16:02:54.163629+00
+22	user	0005_preference_userpreferences	2023-05-25 16:02:54.200251+00
+23	user	0006_target_usertargets	2023-05-25 16:02:54.240917+00
+24	news	0001_initial	2023-05-25 16:02:54.292884+00
+25	quiz	0001_initial	2023-05-25 16:02:54.315708+00
+26	quiz	0002_question_correct_answer_reaction_and_more	2023-05-25 16:02:54.328826+00
+27	sessions	0001_initial	2023-05-25 16:02:54.345668+00
+28	news	0002_alter_news_options	2023-05-26 08:18:53.588353+00
+29	user	0007_alter_user_age_alter_user_first_name	2023-05-26 08:18:53.639755+00
+30	user	0008_user_avatar	2023-05-26 10:47:29.210889+00
+31	levels	0001_initial	2023-05-26 16:51:15.683382+00
+32	levels	0002_userlevel	2023-05-26 16:51:15.726582+00
+33	levels	0003_alter_config_description	2023-05-26 16:51:15.733537+00
+34	levels	0004_alter_config_exp_alter_userlevel_total_exp	2023-05-26 16:51:15.793178+00
+35	levels	0005_alter_userlevel_user	2023-05-26 16:51:15.821529+00
+36	news	0003_tag_newstags	2023-05-26 16:51:15.874606+00
+37	news	0004_alter_news_text	2023-05-26 16:51:15.883821+00
+38	news	0005_alter_tag_background_color	2023-05-26 16:51:15.890926+00
+39	quiz	0003_question_score	2023-05-26 16:51:15.899452+00
+40	quiz	0004_useranswers	2023-05-26 16:51:15.937316+00
+41	user	0009_user_is_vk_id_private_user_vk_id	2023-05-27 12:52:40.611229+00
+42	user	0010_alter_user_avatar	2023-05-27 14:32:35.033999+00
+43	quiz	0005_alter_useranswers_unique_together	2023-05-27 19:00:14.623363+00
+44	course	0001_initial	2023-05-27 19:00:14.790002+00
+45	course	0002_remove_lesson_images_remove_lesson_videos	2023-05-27 19:00:14.825234+00
+46	course	0003_userviewedlessons_userpassedlessons	2023-05-27 19:00:15.008173+00
+47	user	0011_alter_userpreferences_unique_together_and_more	2023-05-27 19:00:15.084786+00
+48	news	0006_alter_newspreferences_unique_together_and_more	2023-05-27 19:00:15.134938+00
+49	quiz	0006_question_text	2023-05-27 19:15:21.5554+00
+50	course	0004_coursetag	2023-05-28 11:44:22.730297+00
+51	quiz	0007_question_image	2023-05-28 12:01:01.161479+00
+52	news	0007_news_image	2023-05-28 14:54:22.869935+00
+53	map	0001_initial	2023-05-28 16:54:40.607014+00
+54	course	0005_lesson_image	2023-05-28 18:07:38.461722+00
+55	course	0006_lesson_description	2023-05-28 18:10:44.225442+00
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+n6398067mgs57yckffah79h64bhlhiq8	.eJxVjEEOwiAQRe_C2hBgAMGl-56BTIdBqoYmpV0Z765NutDtf-_9l0i4rTVtnZc0ZXERIE6_24j04LaDfMd2myXNbV2mUe6KPGiXw5z5eT3cv4OKvX5rZAhWcwEqXBwR5Khc9N6SL0ppsgQm62C9Ap0xGA3gIlgshk08lyjeH-tpN3Q:1q2DyK:c-nzGoH02hLOKHeL9Gs6CmNzWY5Dta3zHI2bW4-punE	2023-06-08 16:37:52.175478+00
+d883s9cw00z73ex6juk4f7twzk249g0a	.eJxVjEEOwiAQRe_C2hCgDFCX7j0DGWaoVA0kpV0Z765NutDtf-_9l4i4rSVuPS9xZnEWRpx-t4T0yHUHfMd6a5JaXZc5yV2RB-3y2jg_L4f7d1Cwl28NMBBmpSYG1gMzGTbOkfUagzOQJgCNGQON7EfLSqdkPQcyCsCwA_H-APHYN_U:1q2DzT:2sGJe6e9RL6nOWyOUL9hrY2ESnVUfeseTHE3GTbexWs	2023-06-08 16:39:03.856514+00
+g8b4ehrclbuzsjzbfzr0x4bmda99xciz	.eJxVjEEOwiAQRe_C2hCgDFCX7j0DGWaoVA0kpV0Z765NutDtf-_9l4i4rSVuPS9xZnEWRpx-t4T0yHUHfMd6a5JaXZc5yV2RB-3y2jg_L4f7d1Cwl28NMBBmpSYG1gMzGTbOkfUagzOQJgCNGQON7EfLSqdkPQcyCsCwA_H-APHYN_U:1q2GoU:NDRrJIpuiP-wSZipdZJ1nfXWvo1hdLH3O6xSKTn3rt0	2023-06-08 19:39:54.42801+00
+3b1l4rxcv1x7ekpftah8hserzdvgwfwe	.eJxVjEEOwiAQRe_C2hCgDFCX7j0DGWaoVA0kpV0Z765NutDtf-_9l4i4rSVuPS9xZnEWRpx-t4T0yHUHfMd6a5JaXZc5yV2RB-3y2jg_L4f7d1Cwl28NMBBmpSYG1gMzGTbOkfUagzOQJgCNGQON7EfLSqdkPQcyCsCwA_H-APHYN_U:1q2ust:qC3q4ebN-XeRb0AtUA9Gx7fJSMcybdy2gUa2x54h2K4	2023-06-10 14:27:07.145654+00
+jd8j4i9i3u1e2jd4gf0ohp2pjixygpad	.eJxVjMsOwiAQRf-FtSEDRR4u3fsNBGYGqRqalHZl_HfbpAvd3nPOfYuY1qXGtfMcRxIXEcTpd8sJn9x2QI_U7pPEqS3zmOWuyIN2eZuIX9fD_TuoqdetZtTBZAUEWAZTrCVnMmoFirMm7xyCp6AcWL0pUBQis_HalQL5jIP4fAHtSDgk:1q2vhB:mU6mAz4EGTq2uP66nD5C5Uw--w1ml-i8zCTYSHSPV9U	2023-06-10 15:19:05.466558+00
+f4cmyboxxojrjq09wixqebaro3dccoej	.eJxVjMsOwiAQRf-FtSEDRR4u3fsNBGYGqRqalHZl_HfbpAvd3nPOfYuY1qXGtfMcRxIXEcTpd8sJn9x2QI_U7pPEqS3zmOWuyIN2eZuIX9fD_TuoqdetZtTBZAUEWAZTrCVnMmoFirMm7xyCp6AcWL0pUBQis_HalQL5jIP4fAHtSDgk:1q2ywy:jeufKgFWHLyd6Q_hScVM-a1i7XOCXbmaJWUVsu6JJ2k	2023-06-10 18:47:36.703826+00
+\.
+
+
+--
+-- Data for Name: levels_config; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.levels_config (id, level, exp, description) FROM stdin;
+1	1	0	Самое начало
+2	2	25	Надо стараться чтобы добраться сюда
+\.
+
+
+--
+-- Data for Name: levels_userlevel; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.levels_userlevel (id, total_exp, current_level_id, user_id) FROM stdin;
+22	0	1	32
+17	0	\N	28
+27	2	1	37
+2	0	\N	11
+15	0	1	27
+3	0	\N	15
+4	0	\N	16
+1	0	\N	8
+5	0	\N	17
+6	0	\N	18
+7	0	\N	19
+23	0	1	33
+8	0	\N	20
+9	0	\N	21
+19	0	\N	30
+10	0	\N	22
+11	0	\N	23
+24	0	1	34
+12	0	\N	24
+13	0	\N	25
+14	0	\N	26
+25	0	1	35
+16	0	1	3
+18	1	1	29
+20	0	\N	31
+21	0	1	2
+26	1	1	36
+\.
+
+
+--
+-- Data for Name: map_point; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.map_point (id, longitude, latitude, name, description, work_time) FROM stdin;
+\.
+
+
+--
+-- Data for Name: news_news; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.news_news (id, title, text, image) FROM stdin;
+2	Восхитительное воплощение традиции: Кабуки - древний искусство Японии	Искусство Кабуки, традиционного японского театра, продолжает очаровывать зрителей своей красотой и глубиной. Это многовековое искусство сочетает в себе танцы, музыку, костюмы и драматическое исполнение. Кабуки представляет собой уникальный спектакль, где актеры в ярких костюмах и экстравагантных масках рассказывают истории о любви, битвах и приключениях. Необычные гримасы, символические жесты и эмоциональное исполнение делают каждое представление незабываемым. Великолепные декорации и сложные костюмы создают впечатляющую визуальную атмосферу. Кабуки - это искусство, которое соединяет прошлое и настоящее, позволяя нам окунуться в японскую культуру и традиции.	news/photo_2023-05-29_00-02-41.jpg
+1	Екатерина Ганелина	Известный российский концертмейстер, постоянный концертмейстер народной артистки России Хиблы Герзмава. «Главное — любить музыку, много заниматься и стремиться продолжать великие традиции!»	news/DSCF0696.jpg
+3	Искусство на улицах: Современное уличное граффити вдохновляет и взволновывает	Уличное граффити продолжает завоевывать сердца горожан и художников со всего мира. Современные уличные художники используют стены и фасады зданий в качестве своего холста, превращая серые поверхности в яркие и выразительные произведения искусства. Эти художники передают свои идеи, эмоции и социальные комментарии через свои работы. Уличное граффити стало платформой для самовыражения и создания уникальных визуальных историй. Многие из этих произведений становятся объектами туристического интереса и популярными местами для фотосессий. Современное уличное граффити переворачивает представление об искусстве и расширяет его границы, превращая городские пространства в настоящие галереи на открытом воздухе.	news/photo_2023-05-29_00-00-41_zLmEerh.jpg
+4	Метаморфозы формы: Загадочная привлекательность современной скульптуры	Современная скульптура продолжает вызывать удивление и захватывать воображение зрителей. Скульпторы используют различные материалы и техники, чтобы создать абстрактные и фантастические формы, которые призывают нас переосмыслить привычное. Эти произведения искусства играют с пространством, светом и текстурой, создавая уникальные эмоциональные и визуальные впечатления. Современная скульптура вносит свой вклад в развитие искусства, вызывая дискуссии и вопросы о природе и смысле формы. Она является памятником креативности и таланту художников, способных превратить безжизненные материалы в произведения, которые заставляют нас задуматься.	news/photo_2023-05-29_00-06-53.jpg
+5	Волшебство звуков: Джазовые музыканты вдохновляют своим талантом и импровизацией	Джазовая музыка - это свобода самовыражения, эмоций и импровизации. Джазовые музыканты владеют невероятным талантом, способным создавать магию из нот и ритмов. Они умеют играть на своих инструментах с такой страстью и мастерством, что зрители погружаются в мир звуков и чувствуют каждую ноту на себе. Их спонтанность и взаимодействие на сцене создают уникальные музыкальные моменты, которые невозможно повторить. Джазовые музыканты воплощают истинную свободу и экспрессию, их выступления захватывают и вдохновляют. Они напоминают нам о силе музыки, которая способна соединять людей и проникать в самые глубины души.	news/photo_2023-05-29_00-11-50.jpg
+6	Искусство в движении: Очарование и энергия современного танца	Современный танец вдохновляет своей выразительностью, инновациями и свободой выражения. Танцоры используют свои тела, чтобы передать эмоции, идеи и истории через движение. Современный танец отражает динамичность современного мира и расширяет границы традиционных танцевальных стилей. Танцоры экспериментируют с различными техниками, взаимодействуют с пространством и музыкой, создавая уникальные хореографии. Смотреть на современный танец - значит погрузиться в поток энергии, эмоций и красоты, которые танцоры воплощают в каждом движении.	news/e11fee20c89e4d4b9643e4517e1a.jpg
+\.
+
+
+--
+-- Data for Name: news_newspreferences; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.news_newspreferences (id, news_id, preference_id) FROM stdin;
+1	1	1
+2	1	2
+3	1	3
+4	1	4
+5	1	5
+6	2	2
+7	2	3
+8	2	4
+9	3	5
+10	3	3
+11	4	3
+12	5	2
+13	5	1
+14	6	2
+\.
+
+
+--
+-- Data for Name: news_newstags; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.news_newstags (id, news_id, tag_id) FROM stdin;
+1	1	1
+2	1	2
+3	2	3
+4	2	4
+5	3	5
+6	3	6
+7	4	7
+8	4	8
+9	5	9
+10	5	10
+11	6	11
+\.
+
+
+--
+-- Data for Name: news_tag; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.news_tag (id, title, background_color) FROM stdin;
+1	Интервью	#8E75A8
+2	🎶 Музыка	#DBB0C2
+3	Кабуки	#FF5454
+4	японская культура	#FF7B00
+5	уличное граффити	#000000
+6	городская культура	#525252
+7	современная скульптура	#1833FF
+8	абстракция	#FF5757
+9	джазовая музыка	#FF7400
+10	музыканты	#FF3333
+11	современный танец	#FF3232
+\.
+
+
+--
+-- Data for Name: quiz_answer; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.quiz_answer (id, text, is_correct, question_id) FROM stdin;
+1	😱 Эдвард Мунк	f	1
+2	🌳 Архип Куинджи	t	1
+3	🌊 Иван Айвазовский	f	1
+4	Леонардо да Винчи	t	2
+5	Пабло Пикассо	f	2
+6	Винсент ван Гог	f	2
+7	Испания	f	3
+8	Италия	f	3
+10	Скульптура	t	4
+11	Графика	f	4
+12	Живопись	f	4
+9	Франция	t	3
+13	Импрессионизм	f	5
+14	Реализм	f	5
+15	Кубизм	t	5
+16	Лев Толстой	t	6
+17	Федор Достоевский	f	6
+18	Александр Пушкин	f	6
+19	1930-е годы	f	7
+20	1960-е годы	f	7
+21	1940-е годы	t	7
+22	The Beatles	t	8
+23	ABBA	f	8
+24	Queen	f	8
+25	1920-е годы	f	9
+26	1950-е годы	f	9
+27	1980-е годы	f	9
+\.
+
+
+--
+-- Data for Name: quiz_question; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.quiz_question (id, question, correct_answer_reaction, incorrect_answer_reaction, score, text, image) FROM stdin;
+4	Величие скульптуры Микеланджело	✅ Правильный ответ! "Пиета" и "Давид" - это знаменитые скульптуры Микеланджело, которые являются великими произведениями искусства Ренессанса.	❌ Неверный ответ. Правильный ответ - скульптура. "Пиета" и "Давид" - это знаменитые скульптуры Микеланджело, которые представляют собой великие произведения искусства Ренессанса.	1	Какое искусство представляют собой скульптуры Микеланджело "Пиета" и "Давид", созданные итальянским художником Ренессанса?	question/1662645599_1-gamerwall-pro-p-znamenitie-skulpturi-mikelandzhelo-vkontak-1.jpg
+2	Загадка "Моны Лизы"	✅ Правильный ответ! Леонардо да Винчи является автором знаменитой картины "Мона Лиза". Она была создана в начале 16 века и считается одним из величайших шедевров Возрождения.	❌ Неверный ответ. Правильный ответ - Леонардо да Винчи. Он является автором знаменитой картины "Мона Лиза", которая была создана в начале 16 века и считается одним из величайших шедевров Возрождения.	1	Кто является автором картины "Мона Лиза", которая была написана в период Возрождения и является одной из самых известных картин в мире?	question/Mona_Lisa_by_Leonardo_da_Vinci_from_C2RMF_retouched.jpg
+3	Место рождения сюрреализма	✅ Правильный ответ! Сюрреализм родился во Франции. Он стал важным движением в искусстве, стремясь выразить фантазию и бессознательные проявления реальности.	❌ Неверный ответ. Правильный ответ - Франция. Сюрреализм родился и развивался именно во Франции, став важным движением в искусстве.	1	В какой стране родился сюрреализм, художественное направление, которое развивалось в 20-х годах XX века и стремилось выразить бессознательные проявления реальности?	question/70556_antoniy.jpg
+5	Откровение кубизма	✅ Правильный ответ! Кубизм именно так и характеризуется - использованием ярких цветов и динамичных форм, разрушением привычных пропорций и геометрических принципов.	❌ Неверный ответ. Правильный ответ - кубизм. Это искусство отличается использованием ярких цветов и динамичных форм, разрушением привычных пропорций и геометрических принципов.	1	Какое направление искусства характеризуется использованием ярких цветов и динамичных форм, разрушением привычных пропорций и геометрических принципов?	question/Juan_Gris_-_Portrait_of_Pablo_Picasso_-_Google_Art_Project.jpg
+6	Эпос "Война и мир"	✅ Правильный ответ! "Война и мир" был написан Львом Толстым. Это эпическое произведение является одним из величайших литературных достижений, описывая жизнь русского общества во время войн с Наполеоном.	❌ Неверный ответ. Правильный ответ - Лев Толстой. Он написал роман "Война и мир", эпическое произведение, описывающее жизнь русского общества во время войн с Наполеоном.	1	Кто написал роман "Война и мир", эпическое произведение, описывающее жизнь русского общества во время войн с Наполеоном?	question/178.jpeg
+7	Золотой век Голливуда	✅ Правильный ответ! "Золотой век" Голливуда приходится на 1930-е и 1940-е годы, когда было выпущено множество незабываемых классических фильмов.	❌ Неверный ответ. Правильный ответ - 1940-е годы. Именно в это время американская киноиндустрия процветала и выпускала множество классических фильмов.	1	Какой период считается "Золотым веком" Голливуда, когда американская киноиндустрия процветала, выпуская множество классических фильмов?	question/x-zahod2-2-11.92e.jpg
+1	#АВыЗнаете как зовут автора этой картины?	✅ Правильный ответ, так держать! «Лунная ночь на Днепре» — одна из самых известных картин Архипа Куинджи.	❌ А вот и нет! Хоть и Айвазовский любил писать моря, «Лунная ночь на Днепре» — одна из самых известных картин Архипа Куинджи.	1	В 1880 году в Санкт-Петербурге была впервые выставлена картина «Лунная ночь на Днепре». Удивительным было то, что она была единственной на выставке. Необыкновенная реалистичность лунного света поразила публику	question/Kuindzhi_Moonlit_night_on_the_Dnieper_1880_grm_x2.jpg
+8	Виртуозы рока	✅ Правильный ответ! The Beatles считаются одной из самых влиятельных групп в истории рок-музыки. Их музыка и творчество оказали значительное влияние на музыкальную индустрию и поколения музыкантов.	❌ Неверный ответ. Правильный ответ - The Beatles. Они считаются одной из самых влиятельных групп в истории рок-музыки, оказав значительное влияние на развитие жанра.	1	Какая группа считается одним из наиболее влиятельных коллективов в истории рок-музыки, взявшая на себя роль катализатора в развитии этого жанра?	question/870x489_0x102_detail_crop_5a905c51305b0484bb6858ba2a17c86de6d50b29541c04ba7f0ad_wQg5VI1.jpg
+9	Золотая эра мьюзикла	✅ Правильный ответ! "Золотая эра" мьюзиклов в Голливуде пришлась на 1950-е годы, когда были созданы множество классических музыкальных фильмов.	❌ Неверный ответ. Правильный ответ - 1950-е годы. В этот период Голливуд испытал своеобразное расцвет мьюзиклов, и было создано множество незабываемых фильмов этого жанра.	1	Какой период считается "Золотой эрой" мьюзиклов в Голливуде, когда были созданы незабываемые фильмы, сочетающие в себе песни, танцы и драматическую историю?	question/Myuzikl.jpeg
+\.
+
+
+--
+-- Data for Name: quiz_useranswers; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.quiz_useranswers (id, answers, score_received, question_id, user_id) FROM stdin;
+1	{1}	0	1	29
+2	{4}	1	2	29
+3	{13}	0	5	29
+4	{4}	1	2	36
+5	{13}	0	5	36
+6	{5}	0	2	37
+7	{15}	1	5	37
+8	{21}	1	7	37
+\.
+
+
+--
+-- Data for Name: user_preference; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.user_preference (code, name) FROM stdin;
+1	🎶 Музыка
+2	🩰 Хореография
+3	🎨 Живопись
+4	🎭 Театр
+5	✍️ Дизайн
+\.
+
+
+--
+-- Data for Name: user_target; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.user_target (code, name) FROM stdin;
+1	Просто так
+2	Для саморазвития
+3	Я родитель
+4	Учусь в МШИ
+5	Собираюсь поступать в МШИ
+\.
+
+
+--
+-- Data for Name: user_user; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.user_user (id, password, last_login, is_superuser, first_name, email, is_staff, is_active, date_joined, role, last_seen, is_first_name_private, is_email_private, is_date_joined_private, age, is_age_private, avatar, is_vk_id_private, vk_id) FROM stdin;
+14	pbkdf2_sha256$320000$reUIJS5P2p0FidwdZfL9zq$/5l733xDr3afLj2lSscYqDxJZ02TP8KI6fNzKB8Pano=	\N	f	\N	a@asdasd.asd	f	t	2023-05-27 15:49:34.019625+00	D	2023-05-27 15:49:34.019664+00	f	t	t	\N	t		t	\N
+15	pbkdf2_sha256$320000$LyJ6yyRFRb5N5aUXhgs5xS$4x9ICTTHqbmpniRbac12Pn8I9jiZFM7aovDaa8pkUmQ=	\N	f	\N	a@asdasd.asdasd	f	t	2023-05-27 15:51:27.86291+00	D	2023-05-27 15:51:27.862945+00	f	t	t	\N	t		t	\N
+16	pbkdf2_sha256$320000$QglGBR3u6VzmWU00xMnQPN$q6voBMOE7wy8r1bcOPpb7ehMTmiewr8cHiXnf2KmrVI=	\N	f	\N	sdasdasd@asdaa.asd	f	t	2023-05-27 15:54:11.474157+00	D	2023-05-27 15:54:11.474201+00	f	t	t	\N	t		t	\N
+17	pbkdf2_sha256$320000$NVEwFBryy2XI4U8e3yH6ic$anOegAd4/afWhmcFm6M054KxQTPeYCWIIb4EjEyPHWQ=	\N	f	\N	asdD@asd.asd	f	t	2023-05-27 15:55:54.170948+00	D	2023-05-27 15:55:54.170994+00	f	t	t	\N	t		t	\N
+18	pbkdf2_sha256$320000$uQReNE3uxNIlwffw1VB2gG$VISeF7qYHdIUaL3HXxOEwTyZ9qnu3EW3iGjxLUihwuE=	\N	f	\N	adfghj.dfghjk@dfghjk.asdasd	f	t	2023-05-27 15:58:09.626954+00	D	2023-05-27 15:58:09.627006+00	f	t	t	\N	t		t	\N
+3	pbkdf2_sha256$320000$GUKllkCT3SGiiOJdHM7UL5$N4eKc6rVoGZRanXgNwe46hcDX4uc8XXKQldhqw99rCs=	2023-05-25 16:44:12.195464+00	t	string	user@example.com	t	t	2023-05-25 16:22:11+00	D	2023-05-25 16:22:11+00	f	t	t	12	t		t	\N
+19	pbkdf2_sha256$320000$tlNr2MEAEOwy5x5BDIbtsS$aTIca5eIE6pARwF2cjOSKG9zkPC+oWYCSosM3WY0Xoo=	\N	f	\N	sdfghjk@sdfghjk.dfghjk	f	t	2023-05-27 15:59:14.38471+00	D	2023-05-27 15:59:14.384756+00	f	t	t	\N	t		t	\N
+4	pbkdf2_sha256$320000$V2BNnolhQb2aFJK7OxBUN5$3uaD+2B8pKQbtcc53g6BmpvwQHnUNUCKOTSHsWCHj94=	\N	f	string	usASaser@example.com	f	t	2023-05-25 16:58:19.390808+00	D	2023-05-25 16:58:19.390821+00	f	t	t	12	t	\N	t	\N
+5	pbkdf2_sha256$320000$hzfNJ7VAeoh3DXMzA9ojSX$ZWnwsy8gOkz4EqGW/qk5oUSgcqYSvliuY2itKYfoRsc=	\N	f	string	usASase123123r@example.com	f	t	2023-05-25 19:31:46.680573+00	D	2023-05-25 19:31:46.680609+00	f	t	t	12	t	\N	t	\N
+6	pbkdf2_sha256$320000$PpehuNUUsLvGxPElz1WnfX$i3cfdRBsRez/ukAQ9YCdN96UhFK2P0WN1RPeGYAGbDs=	\N	f	asdasdasd	asd@asdasd.asd	f	t	2023-05-25 21:38:04.683363+00	D	2023-05-25 21:38:04.683381+00	f	t	t	44	t	\N	t	\N
+7	pbkdf2_sha256$320000$KHtrZ43MsDNKcsSEopTJcJ$4u+ExM+fzOO+P7XHP9xYlD8SmvOh2iFZWs4GxY0F+k8=	\N	f	asdasdasd	asdasd@asdasdasdasd.asdasd	f	t	2023-05-25 21:40:16.010313+00	D	2023-05-25 21:40:16.010336+00	f	t	t	55	t	\N	t	\N
+27	pbkdf2_sha256$320000$teuYfvkaWFBZ9DKC0sivab$ikPH7ngxH/DGIjsKNA4wI2GmzQicILLegZRg62i5RsY=	\N	f	\N	asdasdasd@asdasdasd.asd	f	t	2023-05-27 16:25:08.715621+00	D	2023-05-27 16:25:08.715775+00	f	t	t	\N	t		t	\N
+20	pbkdf2_sha256$320000$WDsVPRdDzeyQK9w92VDcFY$k9r7NSU0eLvtZCsGpGsCDwWwVzESYg2rYrpqT0qlGVg=	\N	f	\N	sdfghjk@wertyuio.sdfghjk	f	t	2023-05-27 16:00:37.517276+00	D	2023-05-27 16:00:37.51732+00	f	t	t	\N	t		t	\N
+26	pbkdf2_sha256$320000$rzU6tgmmkgjzoSXJCj5hUN$qEqqjyS5/81oMKDQf/YIfTwhq0xe0vzSVmaX59KDQ1c=	\N	f	\N	asdasdsad@asdasd.asd	f	t	2023-05-27 16:23:36.569837+00	D	2023-05-27 16:23:36.56988+00	f	t	t	\N	t		t	\N
+21	pbkdf2_sha256$320000$Fj0PsBKniF9RGvzqCpVCX7$XybqWnJlhP8C0Wwl1Fogt3f+MN3WKh0svsbyTEfD2x8=	\N	f	\N	asdasd@dfgbhnm.frghjkl	f	t	2023-05-27 16:14:37.217603+00	D	2023-05-27 16:14:37.217649+00	f	t	t	\N	t		t	\N
+10	pbkdf2_sha256$320000$LVDuN9HW0rlsDFOl0VMThh$6DpsHZdTf1fVhvnu9FK1J64Vi0KgNAPPz32x1X5385Y=	\N	f	\N	asdasdasdljk@asdasd.asdasdasdasd	f	t	2023-05-27 15:39:23.012903+00	D	2023-05-27 15:39:23.013097+00	f	t	t	\N	t		t	\N
+11	pbkdf2_sha256$320000$l9iANGuEqyHqsv858Jnfa8$Jo6vaRRetigalzkBv9UVMdhibcKOAYrsBlKwQ0AfR4A=	\N	f	\N	asd@aaasd.asd	f	t	2023-05-27 15:41:49.272082+00	D	2023-05-27 15:41:49.272156+00	f	t	t	\N	t		t	\N
+12	pbkdf2_sha256$320000$EedYSFSZLNx4FIh9lqOu8V$9AoLZES9Hsi4KlLrM7yfo+veqQg1gorQ44HDokS0I/s=	\N	f	\N	sdfghjk@asdasd.asda	f	t	2023-05-27 15:46:22.677831+00	D	2023-05-27 15:46:22.678027+00	f	t	t	\N	t		t	\N
+13	pbkdf2_sha256$320000$izxmEDfB0ZT6vHavQhovic$N236YAqu309bSwqnmimr7JO8quUT3Rxro6gPjl+k1eA=	\N	f	\N	asdasd@asdas.dasd	f	t	2023-05-27 15:47:50.890694+00	D	2023-05-27 15:47:50.89075+00	f	t	t	\N	t		t	\N
+22	pbkdf2_sha256$320000$nhJ2brdmJED3iCrCanuD1S$XdcZcimWApK/SOS0YZhBBbL3ZUAX3RdRlhjVBZ/H6z4=	\N	f	\N	asdasd@asdasd.asd	f	t	2023-05-27 16:18:33.036614+00	D	2023-05-27 16:18:33.036659+00	f	t	t	\N	t		t	\N
+30	pbkdf2_sha256$320000$RnJCUv4cXX9wjsoy1zgQ3a$JmdwtkbBSWiLKxoRXJrkDmKo3Xo4dfurjl3JU/HpZGQ=	\N	f	\N	sdasasdsad@asdassadasd.asdasdasdasd	f	t	2023-05-27 22:07:13.632302+00	D	2023-05-27 22:07:13.632353+00	f	t	t	\N	t		t	\N
+23	pbkdf2_sha256$320000$OEBvNbwpR0hDAHfiThKZKj$4Ydbw9VN29fNIH1CGf/RFhIusZAEqwX0ZvTQP4qSS2M=	\N	f	\N	asdasdasd2@zasdasdasd.asd	f	t	2023-05-27 16:20:27.667433+00	D	2023-05-27 16:20:27.667471+00	f	t	t	\N	t		t	\N
+24	pbkdf2_sha256$320000$I9oGwwRoPRuX6YX96jPaxy$pPf0mispPDdQLtI/lYAcDa7eY9kLdA227TVsB6XXnkE=	\N	f	\N	asdasd@asdasdasdasdasd.asd	f	t	2023-05-27 16:21:56.341046+00	D	2023-05-27 16:21:56.341105+00	f	t	t	\N	t		t	\N
+25	pbkdf2_sha256$320000$Wok8jbdO7gsO9Ore9GqyBP$vTFfuTLl8yQDNbXSzfjN5Yd6314gSg4aM7ScVwp24zo=	\N	f	\N	asdasdas@ghjkl.asdasdad	f	t	2023-05-27 16:23:01.553687+00	D	2023-05-27 16:23:01.553724+00	f	t	t	\N	t		t	\N
+28		\N	f	Михаил	nerthard@gmail.com	f	t	2023-05-27 18:09:56.068025+00	D	2023-05-27 18:09:56.068181+00	f	t	t	\N	t		t	48815705
+9	pbkdf2_sha256$320000$iqFjywVEUyKhxUjIiJLsej$llyx3gvbSN1NeWgPZKd1z6MAXwIAKxFyBn2SQOm4774=	2023-05-27 18:47:36.699611+00	t	\N	srg.grch@gmail.com	t	t	2023-05-27 14:28:50+00	D	2023-05-27 14:28:50+00	f	t	t	\N	t		t	\N
+29	pbkdf2_sha256$320000$AYiKTdfhhDKuxB3mUkqo2d$kofdGdBaAPq+3JiMKYLzCOfZsmVAYNKvWKkrUCuo2ew=	\N	f	\N	qwe@qwe.qwe	f	t	2023-05-27 22:01:04.230596+00	D	2023-05-27 22:01:04.230781+00	f	t	t	\N	t		t	\N
+2	pbkdf2_sha256$320000$CHHRQluA8du6BjAFeMLr6K$aWxTRkbTpcDBQexPEs+Fub6tbbc49qlIikMsJP1mLQw=	2023-05-27 14:27:07.142324+00	t		admin@game-kit.ru	t	t	2023-05-25 16:06:43.991564+00	D	2023-05-25 16:06:43.99158+00	f	t	t	22	t		t	\N
+35	pbkdf2_sha256$320000$8ngfJGvKxpQWG9DlcEVREy$BkpTqMETf/fK/WMUl2ZdhKGETgFrEvLp+AMZQXN//Ak=	\N	f	\N	asdasdasd@asdasdasd.asdasdasd	f	t	2023-05-28 19:20:23.272413+00	D	2023-05-28 19:20:23.272526+00	f	t	t	\N	t		t	\N
+31	pbkdf2_sha256$320000$agGIG1d16DTQ0ejsRkOe5d$Qryl0gogjhL29cdkCfeTZQXWCQeSikEf/yfRUY4TIpQ=	\N	f	\N	sunnyzlo@yandex.ru	f	t	2023-05-28 13:27:09.055555+00	D	2023-05-28 13:27:09.055797+00	f	t	t	\N	t		t	\N
+8		\N	f	Сергей	Rainor.Heg@gmail.com	f	t	2023-05-27 13:02:21.664585+00	D	2023-05-27 13:02:21.66483+00	f	t	t	\N	t		t	88700710
+32	pbkdf2_sha256$320000$B5ZtqKU58qYYCELDZQxPlo$WiPvw3mQIE/pUYc1r1al0fEsCr9wHJR/NTjn4JbG6Cc=	\N	f	\N	dfghjkl@fghjkl.rfghjkl	f	t	2023-05-28 18:59:33.154412+00	D	2023-05-28 18:59:33.154576+00	f	t	t	\N	t		t	\N
+34	pbkdf2_sha256$320000$23F50qs4p84zyJUdeVKAVi$rm8MNUU6x3EK5cftzxQ845gFRThQXosvVdFYYhYwnpY=	\N	f	\N	qwe@eaftgsuduyagsdyugasd.asd	f	t	2023-05-28 19:16:50.748126+00	D	2023-05-28 19:16:50.748259+00	f	t	t	\N	t		t	\N
+33	pbkdf2_sha256$320000$h6CSSvN1Rke20i9fZgLxxj$hCNc/p5y/XcXc8+wv0iorQebTRQR7ylvt2GKug2naRg=	\N	f	\N	qweqweqwewqe@asdasdasd.asdasdasd	f	t	2023-05-28 19:13:24.177269+00	D	2023-05-28 19:13:24.177454+00	f	t	t	\N	t		t	\N
+36	pbkdf2_sha256$320000$sh9xWGUC7brZH9Tanm0Zo0$lZ4gdegUCngr2t9iWtz/+338sHCgNXKizjuYrAFduzA=	\N	f	\N	tfasduasgdtghasd@asdhjkasjkdhasd.asdasd	f	t	2023-05-28 19:26:41.416786+00	D	2023-05-28 19:26:41.416821+00	f	t	t	\N	t		t	\N
+37	pbkdf2_sha256$320000$xy5FNl25mMbRq7W3sKPAWu$GltIlvFOZgP3zvINjioIN8Pzf9f7HfH9jXZyTF6dsjU=	\N	f	\N	asdasdasd@qasdqweqwe.qwe	f	t	2023-05-28 19:34:42.314209+00	D	2023-05-28 19:34:42.314264+00	f	t	t	\N	t		t	\N
+\.
+
+
+--
+-- Data for Name: user_user_groups; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.user_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: user_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.user_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: user_userpreferences; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.user_userpreferences (id, preference_id, user_id) FROM stdin;
+1	1	20
+2	2	20
+3	3	20
+4	4	20
+5	5	20
+6	1	21
+7	2	21
+8	3	21
+9	4	21
+10	5	21
+11	1	22
+12	2	22
+13	3	22
+14	4	22
+15	5	22
+16	1	23
+17	2	23
+18	3	23
+19	4	23
+20	5	23
+21	1	31
+22	2	31
+23	3	31
+24	4	31
+25	1	33
+26	2	33
+27	4	33
+28	2	34
+29	4	34
+30	2	35
+31	4	35
+\.
+
+
+--
+-- Data for Name: user_usertargets; Type: TABLE DATA; Schema: public; Owner: user
+--
+
+COPY public.user_usertargets (id, target_id, user_id) FROM stdin;
+1	1	20
+2	2	20
+3	3	20
+4	4	20
+5	5	20
+6	1	21
+7	2	21
+8	3	21
+9	4	21
+10	5	21
+11	1	22
+12	2	22
+13	3	22
+14	4	22
+15	5	22
+16	1	23
+17	2	23
+18	3	23
+19	4	23
+20	5	23
+21	1	31
+22	3	31
+23	2	33
+24	4	33
+25	5	33
+26	1	34
+27	5	34
+28	1	35
+29	5	35
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, true);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 56, true);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 104, true);
+
+
+--
+-- Name: course_course_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.course_course_id_seq', 1, true);
+
+
+--
+-- Name: course_coursetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.course_coursetag_id_seq', 1, false);
+
+
+--
+-- Name: course_lesson_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.course_lesson_id_seq', 2, true);
+
+
+--
+-- Name: course_lessonquestion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.course_lessonquestion_id_seq', 1, true);
+
+
+--
+-- Name: course_userpassedlessons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.course_userpassedlessons_id_seq', 1, false);
+
+
+--
+-- Name: course_userviewedlessons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.course_userviewedlessons_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 84, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 26, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 55, true);
+
+
+--
+-- Name: levels_config_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.levels_config_id_seq', 2, true);
+
+
+--
+-- Name: levels_userlevel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.levels_userlevel_id_seq', 27, true);
+
+
+--
+-- Name: map_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.map_point_id_seq', 1, false);
+
+
+--
+-- Name: news_news_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.news_news_id_seq', 6, true);
+
+
+--
+-- Name: news_newspreferences_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.news_newspreferences_id_seq', 14, true);
+
+
+--
+-- Name: news_newstags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.news_newstags_id_seq', 11, true);
+
+
+--
+-- Name: news_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.news_tag_id_seq', 11, true);
+
+
+--
+-- Name: quiz_answer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.quiz_answer_id_seq', 27, true);
+
+
+--
+-- Name: quiz_question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.quiz_question_id_seq', 9, true);
+
+
+--
+-- Name: quiz_useranswers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.quiz_useranswers_id_seq', 8, true);
+
+
+--
+-- Name: user_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.user_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: user_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.user_user_id_seq', 37, true);
+
+
+--
+-- Name: user_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.user_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: user_userpreferences_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.user_userpreferences_id_seq', 31, true);
+
+
+--
+-- Name: user_usertargets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
+--
+
+SELECT pg_catalog.setval('public.user_usertargets_id_seq', 29, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_course course_course_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_course
+    ADD CONSTRAINT course_course_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_coursetag course_coursetag_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_coursetag
+    ADD CONSTRAINT course_coursetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_lesson course_lesson_course_id_number_87c3714c_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lesson
+    ADD CONSTRAINT course_lesson_course_id_number_87c3714c_uniq UNIQUE (course_id, number);
+
+
+--
+-- Name: course_lesson course_lesson_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lesson
+    ADD CONSTRAINT course_lesson_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_lessonquestion course_lessonquestion_lesson_id_question_id_7e1430e0_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lessonquestion
+    ADD CONSTRAINT course_lessonquestion_lesson_id_question_id_7e1430e0_uniq UNIQUE (lesson_id, question_id);
+
+
+--
+-- Name: course_lessonquestion course_lessonquestion_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lessonquestion
+    ADD CONSTRAINT course_lessonquestion_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_userpassedlessons course_userpassedlessons_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userpassedlessons
+    ADD CONSTRAINT course_userpassedlessons_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_userpassedlessons course_userpassedlessons_user_id_lesson_id_460bacc1_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userpassedlessons
+    ADD CONSTRAINT course_userpassedlessons_user_id_lesson_id_460bacc1_uniq UNIQUE (user_id, lesson_id);
+
+
+--
+-- Name: course_userviewedlessons course_userviewedlessons_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userviewedlessons
+    ADD CONSTRAINT course_userviewedlessons_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_userviewedlessons course_userviewedlessons_user_id_lesson_id_d70b7f6e_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userviewedlessons
+    ADD CONSTRAINT course_userviewedlessons_user_id_lesson_id_d70b7f6e_uniq UNIQUE (user_id, lesson_id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: levels_config levels_config_level_key; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_config
+    ADD CONSTRAINT levels_config_level_key UNIQUE (level);
+
+
+--
+-- Name: levels_config levels_config_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_config
+    ADD CONSTRAINT levels_config_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: levels_userlevel levels_userlevel_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_userlevel
+    ADD CONSTRAINT levels_userlevel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: levels_userlevel levels_userlevel_user_id_key; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_userlevel
+    ADD CONSTRAINT levels_userlevel_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: map_point map_point_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.map_point
+    ADD CONSTRAINT map_point_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_news news_news_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_news
+    ADD CONSTRAINT news_news_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_news news_news_title_key; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_news
+    ADD CONSTRAINT news_news_title_key UNIQUE (title);
+
+
+--
+-- Name: news_newspreferences news_newspreferences_news_id_preference_id_136519a7_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newspreferences
+    ADD CONSTRAINT news_newspreferences_news_id_preference_id_136519a7_uniq UNIQUE (news_id, preference_id);
+
+
+--
+-- Name: news_newspreferences news_newspreferences_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newspreferences
+    ADD CONSTRAINT news_newspreferences_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_newstags news_newstags_news_id_tag_id_4556f8f5_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newstags
+    ADD CONSTRAINT news_newstags_news_id_tag_id_4556f8f5_uniq UNIQUE (news_id, tag_id);
+
+
+--
+-- Name: news_newstags news_newstags_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newstags
+    ADD CONSTRAINT news_newstags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_tag news_tag_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_tag
+    ADD CONSTRAINT news_tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_tag news_tag_title_key; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_tag
+    ADD CONSTRAINT news_tag_title_key UNIQUE (title);
+
+
+--
+-- Name: quiz_answer quiz_answer_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_answer
+    ADD CONSTRAINT quiz_answer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quiz_question quiz_question_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_question
+    ADD CONSTRAINT quiz_question_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quiz_useranswers quiz_useranswers_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_useranswers
+    ADD CONSTRAINT quiz_useranswers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quiz_useranswers quiz_useranswers_user_id_question_id_a82cc109_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_useranswers
+    ADD CONSTRAINT quiz_useranswers_user_id_question_id_a82cc109_uniq UNIQUE (user_id, question_id);
+
+
+--
+-- Name: user_preference user_preference_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_preference
+    ADD CONSTRAINT user_preference_pkey PRIMARY KEY (code);
+
+
+--
+-- Name: user_target user_target_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_target
+    ADD CONSTRAINT user_target_pkey PRIMARY KEY (code);
+
+
+--
+-- Name: user_user user_user_email_1c6f3d1a_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user
+    ADD CONSTRAINT user_user_email_1c6f3d1a_uniq UNIQUE (email);
+
+
+--
+-- Name: user_user_groups user_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_groups
+    ADD CONSTRAINT user_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_user_groups user_user_groups_user_id_group_id_bb60391f_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_groups
+    ADD CONSTRAINT user_user_groups_user_id_group_id_bb60391f_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: user_user user_user_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user
+    ADD CONSTRAINT user_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_user_user_permissions user_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_user_permissions
+    ADD CONSTRAINT user_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_user_user_permissions user_user_user_permissions_user_id_permission_id_64f4d5b8_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_user_permissions
+    ADD CONSTRAINT user_user_user_permissions_user_id_permission_id_64f4d5b8_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: user_userpreferences user_userpreferences_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_userpreferences
+    ADD CONSTRAINT user_userpreferences_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_userpreferences user_userpreferences_user_id_preference_id_10850e2b_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_userpreferences
+    ADD CONSTRAINT user_userpreferences_user_id_preference_id_10850e2b_uniq UNIQUE (user_id, preference_id);
+
+
+--
+-- Name: user_usertargets user_usertargets_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_usertargets
+    ADD CONSTRAINT user_usertargets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_usertargets user_usertargets_user_id_target_id_83591bd0_uniq; Type: CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_usertargets
+    ADD CONSTRAINT user_usertargets_user_id_target_id_83591bd0_uniq UNIQUE (user_id, target_id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: course_coursetag_course_id_ee1da7e2; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_coursetag_course_id_ee1da7e2 ON public.course_coursetag USING btree (course_id);
+
+
+--
+-- Name: course_coursetag_tag_id_a63658f1; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_coursetag_tag_id_a63658f1 ON public.course_coursetag USING btree (tag_id);
+
+
+--
+-- Name: course_lesson_course_id_65df4a1c; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_lesson_course_id_65df4a1c ON public.course_lesson USING btree (course_id);
+
+
+--
+-- Name: course_lessonquestion_lesson_id_d9eb4ba1; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_lessonquestion_lesson_id_d9eb4ba1 ON public.course_lessonquestion USING btree (lesson_id);
+
+
+--
+-- Name: course_lessonquestion_question_id_144e1b42; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_lessonquestion_question_id_144e1b42 ON public.course_lessonquestion USING btree (question_id);
+
+
+--
+-- Name: course_userpassedlessons_lesson_id_57333c27; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_userpassedlessons_lesson_id_57333c27 ON public.course_userpassedlessons USING btree (lesson_id);
+
+
+--
+-- Name: course_userpassedlessons_user_id_59d33ee9; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_userpassedlessons_user_id_59d33ee9 ON public.course_userpassedlessons USING btree (user_id);
+
+
+--
+-- Name: course_userviewedlessons_lesson_id_77e66c45; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_userviewedlessons_lesson_id_77e66c45 ON public.course_userviewedlessons USING btree (lesson_id);
+
+
+--
+-- Name: course_userviewedlessons_user_id_f3a32268; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX course_userviewedlessons_user_id_f3a32268 ON public.course_userviewedlessons USING btree (user_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: levels_userlevel_current_level_id_c3bb25a9; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX levels_userlevel_current_level_id_c3bb25a9 ON public.levels_userlevel USING btree (current_level_id);
+
+
+--
+-- Name: news_news_title_dea61447_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX news_news_title_dea61447_like ON public.news_news USING btree (title varchar_pattern_ops);
+
+
+--
+-- Name: news_newspreferences_news_id_cf02b3e1; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX news_newspreferences_news_id_cf02b3e1 ON public.news_newspreferences USING btree (news_id);
+
+
+--
+-- Name: news_newspreferences_preference_id_9f6ebed6; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX news_newspreferences_preference_id_9f6ebed6 ON public.news_newspreferences USING btree (preference_id);
+
+
+--
+-- Name: news_newspreferences_preference_id_9f6ebed6_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX news_newspreferences_preference_id_9f6ebed6_like ON public.news_newspreferences USING btree (preference_id varchar_pattern_ops);
+
+
+--
+-- Name: news_newstags_news_id_7f9b5a57; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX news_newstags_news_id_7f9b5a57 ON public.news_newstags USING btree (news_id);
+
+
+--
+-- Name: news_newstags_tag_id_1f9b36fa; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX news_newstags_tag_id_1f9b36fa ON public.news_newstags USING btree (tag_id);
+
+
+--
+-- Name: news_tag_title_297af55f_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX news_tag_title_297af55f_like ON public.news_tag USING btree (title varchar_pattern_ops);
+
+
+--
+-- Name: quiz_answer_question_id_26edde8a; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX quiz_answer_question_id_26edde8a ON public.quiz_answer USING btree (question_id);
+
+
+--
+-- Name: quiz_useranswers_question_id_4b09acec; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX quiz_useranswers_question_id_4b09acec ON public.quiz_useranswers USING btree (question_id);
+
+
+--
+-- Name: quiz_useranswers_user_id_527f5e7d; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX quiz_useranswers_user_id_527f5e7d ON public.quiz_useranswers USING btree (user_id);
+
+
+--
+-- Name: user_preference_code_8d6cc6f1_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_preference_code_8d6cc6f1_like ON public.user_preference USING btree (code varchar_pattern_ops);
+
+
+--
+-- Name: user_target_code_58649486_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_target_code_58649486_like ON public.user_target USING btree (code varchar_pattern_ops);
+
+
+--
+-- Name: user_user_email_1c6f3d1a_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_user_email_1c6f3d1a_like ON public.user_user USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: user_user_groups_group_id_c57f13c0; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_user_groups_group_id_c57f13c0 ON public.user_user_groups USING btree (group_id);
+
+
+--
+-- Name: user_user_groups_user_id_13f9a20d; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_user_groups_user_id_13f9a20d ON public.user_user_groups USING btree (user_id);
+
+
+--
+-- Name: user_user_user_permissions_permission_id_ce49d4de; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_user_user_permissions_permission_id_ce49d4de ON public.user_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: user_user_user_permissions_user_id_31782f58; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_user_user_permissions_user_id_31782f58 ON public.user_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: user_userpreferences_preference_id_86585eb8; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_userpreferences_preference_id_86585eb8 ON public.user_userpreferences USING btree (preference_id);
+
+
+--
+-- Name: user_userpreferences_preference_id_86585eb8_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_userpreferences_preference_id_86585eb8_like ON public.user_userpreferences USING btree (preference_id varchar_pattern_ops);
+
+
+--
+-- Name: user_userpreferences_user_id_ff9b9d25; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_userpreferences_user_id_ff9b9d25 ON public.user_userpreferences USING btree (user_id);
+
+
+--
+-- Name: user_usertargets_target_id_b0d951eb; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_usertargets_target_id_b0d951eb ON public.user_usertargets USING btree (target_id);
+
+
+--
+-- Name: user_usertargets_target_id_b0d951eb_like; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_usertargets_target_id_b0d951eb_like ON public.user_usertargets USING btree (target_id varchar_pattern_ops);
+
+
+--
+-- Name: user_usertargets_user_id_69d228df; Type: INDEX; Schema: public; Owner: user
+--
+
+CREATE INDEX user_usertargets_user_id_69d228df ON public.user_usertargets USING btree (user_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_coursetag course_coursetag_course_id_ee1da7e2_fk_course_course_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_coursetag
+    ADD CONSTRAINT course_coursetag_course_id_ee1da7e2_fk_course_course_id FOREIGN KEY (course_id) REFERENCES public.course_course(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_coursetag course_coursetag_tag_id_a63658f1_fk_news_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_coursetag
+    ADD CONSTRAINT course_coursetag_tag_id_a63658f1_fk_news_tag_id FOREIGN KEY (tag_id) REFERENCES public.news_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_lesson course_lesson_course_id_65df4a1c_fk_course_course_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lesson
+    ADD CONSTRAINT course_lesson_course_id_65df4a1c_fk_course_course_id FOREIGN KEY (course_id) REFERENCES public.course_course(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_lessonquestion course_lessonquestion_lesson_id_d9eb4ba1_fk_course_lesson_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lessonquestion
+    ADD CONSTRAINT course_lessonquestion_lesson_id_d9eb4ba1_fk_course_lesson_id FOREIGN KEY (lesson_id) REFERENCES public.course_lesson(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_lessonquestion course_lessonquestion_question_id_144e1b42_fk_quiz_question_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_lessonquestion
+    ADD CONSTRAINT course_lessonquestion_question_id_144e1b42_fk_quiz_question_id FOREIGN KEY (question_id) REFERENCES public.quiz_question(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_userpassedlessons course_userpassedlessons_lesson_id_57333c27_fk_course_lesson_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userpassedlessons
+    ADD CONSTRAINT course_userpassedlessons_lesson_id_57333c27_fk_course_lesson_id FOREIGN KEY (lesson_id) REFERENCES public.course_lesson(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_userpassedlessons course_userpassedlessons_user_id_59d33ee9_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userpassedlessons
+    ADD CONSTRAINT course_userpassedlessons_user_id_59d33ee9_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_userviewedlessons course_userviewedlessons_lesson_id_77e66c45_fk_course_lesson_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userviewedlessons
+    ADD CONSTRAINT course_userviewedlessons_lesson_id_77e66c45_fk_course_lesson_id FOREIGN KEY (lesson_id) REFERENCES public.course_lesson(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: course_userviewedlessons course_userviewedlessons_user_id_f3a32268_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.course_userviewedlessons
+    ADD CONSTRAINT course_userviewedlessons_user_id_f3a32268_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: levels_userlevel levels_userlevel_current_level_id_c3bb25a9_fk_levels_config_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_userlevel
+    ADD CONSTRAINT levels_userlevel_current_level_id_c3bb25a9_fk_levels_config_id FOREIGN KEY (current_level_id) REFERENCES public.levels_config(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: levels_userlevel levels_userlevel_user_id_4b012dc7_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.levels_userlevel
+    ADD CONSTRAINT levels_userlevel_user_id_4b012dc7_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: news_newspreferences news_newspreferences_news_id_cf02b3e1_fk_news_news_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newspreferences
+    ADD CONSTRAINT news_newspreferences_news_id_cf02b3e1_fk_news_news_id FOREIGN KEY (news_id) REFERENCES public.news_news(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: news_newspreferences news_newspreferences_preference_id_9f6ebed6_fk_user_pref; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newspreferences
+    ADD CONSTRAINT news_newspreferences_preference_id_9f6ebed6_fk_user_pref FOREIGN KEY (preference_id) REFERENCES public.user_preference(code) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: news_newstags news_newstags_news_id_7f9b5a57_fk_news_news_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newstags
+    ADD CONSTRAINT news_newstags_news_id_7f9b5a57_fk_news_news_id FOREIGN KEY (news_id) REFERENCES public.news_news(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: news_newstags news_newstags_tag_id_1f9b36fa_fk_news_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.news_newstags
+    ADD CONSTRAINT news_newstags_tag_id_1f9b36fa_fk_news_tag_id FOREIGN KEY (tag_id) REFERENCES public.news_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: quiz_answer quiz_answer_question_id_26edde8a_fk_quiz_question_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_answer
+    ADD CONSTRAINT quiz_answer_question_id_26edde8a_fk_quiz_question_id FOREIGN KEY (question_id) REFERENCES public.quiz_question(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: quiz_useranswers quiz_useranswers_question_id_4b09acec_fk_quiz_question_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_useranswers
+    ADD CONSTRAINT quiz_useranswers_question_id_4b09acec_fk_quiz_question_id FOREIGN KEY (question_id) REFERENCES public.quiz_question(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: quiz_useranswers quiz_useranswers_user_id_527f5e7d_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.quiz_useranswers
+    ADD CONSTRAINT quiz_useranswers_user_id_527f5e7d_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_user_groups user_user_groups_group_id_c57f13c0_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_groups
+    ADD CONSTRAINT user_user_groups_group_id_c57f13c0_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_user_groups user_user_groups_user_id_13f9a20d_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_groups
+    ADD CONSTRAINT user_user_groups_user_id_13f9a20d_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_user_user_permissions user_user_user_permi_permission_id_ce49d4de_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_user_permissions
+    ADD CONSTRAINT user_user_user_permi_permission_id_ce49d4de_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_user_user_permissions user_user_user_permissions_user_id_31782f58_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_user_user_permissions
+    ADD CONSTRAINT user_user_user_permissions_user_id_31782f58_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_userpreferences user_userpreferences_preference_id_86585eb8_fk_user_pref; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_userpreferences
+    ADD CONSTRAINT user_userpreferences_preference_id_86585eb8_fk_user_pref FOREIGN KEY (preference_id) REFERENCES public.user_preference(code) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_userpreferences user_userpreferences_user_id_ff9b9d25_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_userpreferences
+    ADD CONSTRAINT user_userpreferences_user_id_ff9b9d25_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_usertargets user_usertargets_target_id_b0d951eb_fk_user_target_code; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_usertargets
+    ADD CONSTRAINT user_usertargets_target_id_b0d951eb_fk_user_target_code FOREIGN KEY (target_id) REFERENCES public.user_target(code) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_usertargets user_usertargets_user_id_69d228df_fk_user_user_id; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY public.user_usertargets
+    ADD CONSTRAINT user_usertargets_user_id_69d228df_fk_user_user_id FOREIGN KEY (user_id) REFERENCES public.user_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

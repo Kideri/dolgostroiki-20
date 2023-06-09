@@ -10,5 +10,7 @@ class ListPointsSerializer(serializers.ModelSerializer):
             "latitude",
             "name",
             "description",
-            "work_time"
+            "work_time",
+            "address",
+            "phone_number",
         )

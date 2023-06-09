@@ -8,4 +8,6 @@ class Point(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
 
-    work_time = models.CharField(max_length=2047)
+    work_time = models.CharField(max_length=2047, null=True, blank=True)
+    address = models.CharField(max_length=2047, null=True, blank=True)
+    phone_number = models.CharField(max_length=16, null=True, blank=True)
