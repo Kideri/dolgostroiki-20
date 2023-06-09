@@ -9,3 +9,4 @@ class LevelConfigResponseSerializer(serializers.ModelSerializer):
             "level",
             "exp",
         )
+        ref_name = "level_config_list_response_serializer"
