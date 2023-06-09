@@ -8,6 +8,6 @@ from map.views import (
 
 urlpatterns = [
     path("", PointListView.as_view(), name="points_list"),
-    path("/create", CreatePointView.as_view(), name="create_point"),
+    path("create", CreatePointView.as_view(), name="create_point"),
     path("<str:query>", PointSearchView.as_view(), name="points_search"),
 ]
