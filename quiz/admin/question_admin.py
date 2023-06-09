@@ -24,6 +24,7 @@ class QuestionAdmin(admin.ModelAdmin):
                     "image",
                     "question",
                     "text",
+                    "score",
                 )
             },
         ),
