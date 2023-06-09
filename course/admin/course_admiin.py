@@ -14,6 +14,7 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = ("name", )
     list_display_links = ("name", )
     search_fields = ("name", )
+    readonly_fields = ("image_tag", )
     fieldsets = (
         (
             None,
@@ -21,6 +22,8 @@ class CourseAdmin(admin.ModelAdmin):
                 "fields": (
                     "name",
                     "difficulty",
+                    "image_tag",
+                    "image",
                 )
             },
         ),

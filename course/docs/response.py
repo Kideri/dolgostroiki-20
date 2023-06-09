@@ -4,6 +4,7 @@ from common.serializers import BaseResponseSerializer
 
 class ListCourseDocs(serializers.Serializer):
     id = serializers.IntegerField()
+    image = serializers.ImageField()
     name = serializers.CharField(max_length=255)
     difficulty = serializers.IntegerField()
     tags = serializers.ListSerializer(child=serializers.IntegerField())

@@ -18,7 +18,7 @@ class Lesson(models.Model):
     duration = models.IntegerField(validators=[MinValueValidator(0)])
     image = models.ImageField(upload_to="question/", null=True, blank=True)
     video = models.FileField(
-        upload_to='lesson/videos/', null=True,
+        upload_to='lesson/videos/', null=True, blank=True,
         validators=[
             FileExtensionValidator(
                 allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv']

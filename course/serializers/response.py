@@ -9,6 +9,7 @@ class ListCourseResponse(serializers.ModelSerializer):
         model = Course
         fields = (
             "id",
+            "image",
             "name",
             "difficulty",
             "tags",
@@ -41,6 +42,7 @@ class RetrieveCourseResponse(ListCourseResponse):
         model = Course
         fields = (
             "id",
+            "image",
             "name",
             "author_name",
             "author_description",
