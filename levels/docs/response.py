@@ -4,4 +4,4 @@ from levels.serializers import LevelConfigResponseSerializer
 
 
 class LevelConfigDocsResponseSerializer(BaseResponseSerializer):
-    result = serializers.ListSerializer(child=LevelConfigResponseSerializer)
+    result = serializers.ListSerializer(child=LevelConfigResponseSerializer())
