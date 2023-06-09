@@ -14,7 +14,7 @@ class LevelsListView(BaseAPIView):
 
     @swagger_auto_schema(
         responses={200: LevelConfigDocsResponseSerializer(), 401: BaseResponseSerializer()},
-        tags=["Map"],
+        tags=["Levels"],
         operation_id="Get levels list",
     )
     def get(self, request):
