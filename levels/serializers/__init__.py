@@ -1,1 +1,2 @@
 from .user_level_serializer import UserLevelResponseSerializer
+from .response import LevelConfigResponseSerializer
