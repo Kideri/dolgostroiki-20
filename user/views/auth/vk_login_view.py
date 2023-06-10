@@ -33,14 +33,14 @@ class VkLoginView(BaseAPIView):
         vk_access_token = request_data.get('vk_access_token')
         email = request_data.get('email')
 
-        url = f'https://api.vk.com/method/account.getProfileInfo?access_token={vk_access_token}&v=5.131'
+        url = f'https://api.vk.com/method/users.get?access_token={vk_access_token}&v=5.131'
 
         data = requests.post(url).json()
         if 'error' in data:
             print('-->', data)
             raise CustomException('invalid_token')
 
-        data = data.get('response')
+        data = data.get('response')[0]
         vk_id = data.get('id')
 
         user = User.objects.filter(vk_id=vk_id).first()
