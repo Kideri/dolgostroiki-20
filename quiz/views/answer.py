@@ -63,10 +63,11 @@ class QuestionAnswerView(BaseAPIView):
         )
 
         if object_.lesson.exists():
-            UserPassedLessons.objects.create(
-                user=self.request.user,
-                lesson=object_.lesson.lesson
-            )
+            for q_lesson in object_.lesson.all():
+                UserPassedLessons.objects.create(
+                    user=self.request.user,
+                    lesson=q_lesson.lesson
+                )
 
         return self.response_serializer(
             {'score': score, 'answers': object_.correct_answers_retrieve, 'reaction': reaction}
