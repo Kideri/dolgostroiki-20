@@ -3,6 +3,8 @@ from map.models import Point
 
 
 class ListPointsSerializer(serializers.ModelSerializer):
+    preferences = serializers.ListSerializer(child=serializers.CharField(max_length=31))
+
     class Meta:
         model = Point
         fields = (
@@ -13,4 +15,5 @@ class ListPointsSerializer(serializers.ModelSerializer):
             "work_time",
             "address",
             "phone_number",
+            "preferences",
         )
