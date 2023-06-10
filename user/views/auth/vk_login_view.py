@@ -37,6 +37,7 @@ class VkLoginView(BaseAPIView):
 
         data = requests.post(url).json()
         if 'error' in data:
+            print('-->', data)
             raise CustomException('invalid_token')
 
         data = data.get('response')
