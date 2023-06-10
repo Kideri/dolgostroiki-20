@@ -48,6 +48,9 @@ class VkLoginView(BaseAPIView):
         if user:
             return {"access": user.access_token}
 
+        if User.objects.filter(email=email).exists():
+            raise CustomException('invalid_email')
+
         user = User.objects.create(email=email, vk_id=vk_id, first_name=data.get('first_name'))
         user.save()
 
